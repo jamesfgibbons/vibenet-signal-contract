@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-contract.dev/v1/schema.json",
+  "title": "Signal Contract v1",
+  "description": "A renderer-facing awareness event emitted by agents, data systems, and devices.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "entity",
+    "event",
+    "timestamp",
+    "coordinates",
+    "channel",
+    "intensity",
+    "ttl_ms",
+    "metadata"
+  ],
+  "properties": {
+    "entity": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable subject identifier."
+    },
+    "event": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Meaningful awareness event."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 / ISO 8601 timestamp."
+    },
+    "coordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "valence",
+        "energy",
+        "tension"
+      ],
+      "properties": {
+        "valence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "energy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "tension": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "nominal",
+        "advisory",
+        "warning",
+        "critical",
+        "recovery",
+        "opportunity",
+        "handoff"
+      ],
+      "description": "Public semantic channel."
+    },
+    "intensity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Renderer-facing emphasis."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Optional producer confidence."
+    },
+    "ttl_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647,
+      "description": "Time-to-live in milliseconds."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional contextual metadata. Empty object allowed."
+    }
+  }
+}

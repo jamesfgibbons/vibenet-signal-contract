@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signal Contract</title>
+    <meta
+      name="description"
+      content="A public protocol for awareness events emitted by agents, data systems, and devices."
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <p class="eyebrow">SIGNAL CONTRACT</p>
+      <h1>Awareness events for agents, data systems, and devices.</h1>
+      <p class="lede">
+        Signal Contract standardizes a small JSON object that producers emit and renderers consume.
+      </p>
+      <p class="standalone">One JSON object. Many renderers. No shared backend required.</p>
+
+      <section class="panel">
+        <h2>What it is</h2>
+        <p>
+          Signal Contract is the awareness layer. It does not govern what agents may publish. It
+          standardizes how systems emit awareness when meaningful state changes occur.
+        </p>
+        <p>
+          Constitutional CMS governs what agents are permitted to publish. Signal Contract
+          standardizes how systems emit awareness when governed state changes.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Canonical example</h2>
+        <pre><code>{
+  "entity": "agent.serpradio.route_intelligence",
+  "event": "price_volatility_warning",
+  "timestamp": "2026-04-19T13:04:00Z",
+  "coordinates": {
+    "valence": 0.31,
+    "energy": 0.66,
+    "tension": 0.82
+  },
+  "channel": "warning",
+  "intensity": 0.83,
+  "confidence": 0.87,
+  "ttl_ms": 12000,
+  "metadata": {
+    "source": "serpradio",
+    "route": "JFK-LHR",
+    "producer": "route_intelligence_adapter"
+  }
+}</code></pre>
+      </section>
+
+      <section class="panel">
+        <h2>Public channels</h2>
+        <ul class="channels">
+          <li>nominal</li>
+          <li>advisory</li>
+          <li>warning</li>
+          <li>critical</li>
+          <li>recovery</li>
+          <li>opportunity</li>
+          <li>handoff</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Resources</h2>
+        <ul class="links">
+          <li><a href="../README.md">README</a></li>
+          <li><a href="../spec/v1/SPEC.md">Spec</a></li>
+          <li><a href="./v1/schema.json">Schema</a></li>
+          <li><a href="../examples/browser-earcon/">Browser earcon example</a></li>
+          <li><a href="../examples/python-logger/">Python logger example</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

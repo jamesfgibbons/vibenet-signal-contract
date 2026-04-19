@@ -1,0 +1,43 @@
+[
+  {
+    "name": "canonical_readme_example",
+    "payload": {
+      "entity": "agent.serpradio.route_intelligence",
+      "event": "price_volatility_warning",
+      "timestamp": "2026-04-19T13:04:00Z",
+      "coordinates": {
+        "valence": 0.31,
+        "energy": 0.66,
+        "tension": 0.82
+      },
+      "channel": "warning",
+      "intensity": 0.83,
+      "confidence": 0.87,
+      "ttl_ms": 12000,
+      "metadata": {
+        "source": "serpradio",
+        "route": "JFK-LHR",
+        "producer": "route_intelligence_adapter"
+      }
+    }
+  },
+  {
+    "name": "handoff_without_confidence",
+    "payload": {
+      "entity": "device.browser.overview_panel",
+      "event": "operator_handoff_ready",
+      "timestamp": "2026-04-19T13:05:00Z",
+      "coordinates": {
+        "valence": 0.57,
+        "energy": 0.44,
+        "tension": 0.28
+      },
+      "channel": "handoff",
+      "intensity": 0.45,
+      "ttl_ms": 5000,
+      "metadata": {
+        "target": "ops.shift_b"
+      }
+    }
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "missing_entity",
+    "payload": {
+      "event": "price_volatility_warning",
+      "timestamp": "2026-04-19T13:04:00Z",
+      "coordinates": {
+        "valence": 0.31,
+        "energy": 0.66,
+        "tension": 0.82
+      },
+      "channel": "warning",
+      "intensity": 0.83,
+      "ttl_ms": 12000,
+      "metadata": {}
+    }
+  },
+  {
+    "name": "invalid_channel",
+    "payload": {
+      "entity": "agent.test",
+      "event": "channel_mismatch",
+      "timestamp": "2026-04-19T13:04:00Z",
+      "coordinates": {
+        "valence": 0.31,
+        "energy": 0.66,
+        "tension": 0.82
+      },
+      "channel": "B",
+      "intensity": 0.83,
+      "ttl_ms": 12000,
+      "metadata": {}
+    }
+  },
+  {
+    "name": "negative_ttl",
+    "payload": {
+      "entity": "agent.test",
+      "event": "expired_before_emit",
+      "timestamp": "2026-04-19T13:04:00Z",
+      "coordinates": {
+        "valence": 0.31,
+        "energy": 0.66,
+        "tension": 0.82
+      },
+      "channel": "warning",
+      "intensity": 0.83,
+      "ttl_ms": -1,
+      "metadata": {}
+    }
+  },
+  {
+    "name": "malformed_coordinates",
+    "payload": {
+      "entity": "agent.test",
+      "event": "bad_coordinates",
+      "timestamp": "2026-04-19T13:04:00Z",
+      "coordinates": {
+        "valence": 1.2,
+        "energy": 0.66
+      },
+      "channel": "warning",
+      "intensity": 0.83,
+      "ttl_ms": 12000,
+      "metadata": {}
+    }
+  },
+  {
+    "name": "extra_top_level_property",
+    "payload": {
+      "entity": "agent.test",
+      "event": "bad_extra",
+      "timestamp": "2026-04-19T13:04:00Z",
+      "coordinates": {
+        "valence": 0.31,
+        "energy": 0.66,
+        "tension": 0.82
+      },
+      "channel": "warning",
+      "intensity": 0.83,
+      "ttl_ms": 12000,
+      "metadata": {},
+      "private_channel": "B"
+    }
+  }
+]
