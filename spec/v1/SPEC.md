@@ -1,8 +1,8 @@
-# Signal Contract v1
+# VIBEnet Signal Contract v1
 
 ## Purpose
 
-Signal Contract standardizes how systems emit awareness when meaningful state changes occur.
+Signal Contract standardizes how systems emit renderer-facing awareness when meaningful state changes occur.
 
 The contract is intentionally small:
 
@@ -10,29 +10,25 @@ The contract is intentionally small:
 - adapters transport it
 - renderers interpret it
 
-This keeps the contract usable across browsers, loggers, earcons, audits, voice agents, MCP tools, and device surfaces.
+This keeps the contract usable across browsers, loggers, earcons, voice systems, haptics, ambient displays, and device surfaces.
 
 ## Canonical example
 
 ```json
 {
-  "entity": "agent.serpradio.route_intelligence",
-  "event": "price_volatility_warning",
-  "timestamp": "2026-04-19T13:04:00Z",
-  "coordinates": {
-    "valence": 0.31,
-    "energy": 0.66,
-    "tension": 0.82
-  },
-  "channel": "warning",
-  "intensity": 0.83,
-  "confidence": 0.87,
-  "ttl_ms": 12000,
-  "metadata": {
-    "source": "serpradio",
-    "route": "JFK-LHR",
-    "producer": "route_intelligence_adapter"
-  }
+  "schema_version": "1.0",
+  "id": "sig_demo_001",
+  "occurred_at": "2026-04-20T12:00:00Z",
+  "producer": "your-agent",
+  "entity": "agent.your_system.worker_01",
+  "event": "handoff.requested",
+  "channel": "handoff",
+  "valence": 0.5,
+  "energy": 0.6,
+  "tension": 0.7,
+  "intensity": 0.7,
+  "hue": 44,
+  "pulse": 0.8
 }
 ```
 
@@ -42,30 +38,27 @@ This keeps the contract usable across browsers, loggers, earcons, audits, voice 
 
 | Field | Type | Meaning |
 | --- | --- | --- |
+| `schema_version` | `string` | Published version of the flat public event object; v1 requires `"1.0"` |
+| `id` | `string` | Stable event identifier |
+| `occurred_at` | `string` | RFC 3339 / ISO 8601 date-time |
+| `producer` | `string` | Producer or adapter that emitted the event |
 | `entity` | `string` | Stable subject identifier |
-| `event` | `string` | The state change or awareness event |
-| `timestamp` | `string` | RFC 3339 / ISO 8601 timestamp in UTC or offset form |
-| `coordinates` | `object` | Public VET-style coordinates |
+| `event` | `string` | Meaningful awareness event |
 | `channel` | `string` | Public semantic channel |
+| `valence` | `number` | Normalized affective polarity from `0.0` to `1.0` |
+| `energy` | `number` | Normalized activity level from `0.0` to `1.0` |
+| `tension` | `number` | Normalized instability from `0.0` to `1.0` |
 | `intensity` | `number` | Renderer-facing emphasis from `0.0` to `1.0` |
-| `ttl_ms` | `integer` | Time-to-live in milliseconds |
-| `metadata` | `object` | Optional extra context container, allowed to be empty |
+| `hue` | `number` | Renderer-facing hue hint from `0` to `360` |
+| `pulse` | `number` | Renderer-facing cadence hint from `0.0` to `1.0` |
 
 ### Optional fields
 
 | Field | Type | Meaning |
 | --- | --- | --- |
-| `confidence` | `number` | Producer confidence from `0.0` to `1.0` |
-
-## Coordinates
-
-`coordinates` contains three public dimensions:
-
-- `valence`: approach/avoid quality
-- `energy`: quiet/intense quality
-- `tension`: resolved/unstable quality
-
-Signal Contract v1 exposes the coordinates, not the formulas that produced them.
+| `confidence` | `number` | Optional producer confidence from `0.0` to `1.0` |
+| `ttl_ms` | `integer` | Optional time-to-live in milliseconds |
+| `metadata` | `object` | Optional extra context container, allowed to be empty |
 
 ## Public channels
 
@@ -81,12 +74,23 @@ Signal Contract v1 uses seven public semantic channels:
 
 Private taxonomies must be mapped to this public set before emission.
 
+## Field semantics
+
+- `valence` describes the polarity of the current state
+- `energy` describes activity level
+- `tension` describes instability or unresolved uncertainty
+- `intensity` is the renderer-facing urgency/emphasis
+- `hue` is a renderer-facing color hint
+- `pulse` is a renderer-facing temporal/cadence hint
+
+Signal Contract v1 exposes the public state dimensions. It does not expose the internal formulas or renderer logic used to derive or express them.
+
 ## Timestamp and TTL
 
-- `timestamp` records when the producer emitted the signal.
-- `ttl_ms` declares how long downstream consumers may treat the signal as current.
-- `ttl_ms = 0` means the signal is instantaneous and may be discarded after immediate handling.
-- Consumers may ignore expired signals, degrade them visually, or archive them as history.
+- `occurred_at` records when the producer emitted the event
+- `ttl_ms` declares how long downstream consumers may treat the signal as current
+- `ttl_ms = 0` means the signal is instantaneous and may be discarded after immediate handling
+- consumers may ignore expired signals, degrade them visually, or archive them as history
 
 ## Metadata
 
@@ -96,7 +100,7 @@ Private taxonomies must be mapped to this public set before emission.
 - source system names
 - device hints
 - trace references
-- renderer hints
+- renderer-safe contextual details
 
 Renderers must not depend on `metadata` for core protocol validity.
 
@@ -104,12 +108,12 @@ Renderers must not depend on `metadata` for core protocol validity.
 
 Signal Contract is renderer-agnostic. The same object can feed:
 
-- a browser earcon
+- a browser pulse primitive
 - a terminal logger
 - an audit trail
 - a voice agent
-- an MCP tool
 - a wearable surface
+- a visual or haptic renderer
 
 The contract does not require a shared backend. It only requires a producer and a consumer that agree on the object.
 
@@ -122,7 +126,7 @@ Constitutional CMS governs what agents are permitted to publish. Signal Contract
 Signal Contract v1 does not define:
 
 - private channel taxonomies
-- VET formulas
+- producer scoring formulas
 - transport protocols
 - auth schemes
 - renderer certification

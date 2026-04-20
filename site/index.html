@@ -3,55 +3,73 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Signal Contract</title>
+    <title>VIBEnet Signal Contract</title>
     <meta
       name="description"
-      content="A public protocol for awareness events emitted by agents, data systems, and devices."
+      content="VIBEnet Signal Contract is a flat JSON protocol for renderer-facing agent awareness events."
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <main class="shell">
-      <p class="eyebrow">SIGNAL CONTRACT</p>
-      <h1>Awareness events for agents, data systems, and devices.</h1>
+      <p class="eyebrow">VIBENET SIGNAL CONTRACT</p>
+      <h1>Flat awareness events for agents, systems, and devices.</h1>
       <p class="lede">
-        Signal Contract standardizes a small JSON object that producers emit and renderers consume.
+        VIBEnet Signal Contract standardizes one small JSON object that producers emit and renderers consume.
       </p>
       <p class="standalone">One JSON object. Many renderers. No shared backend required.</p>
 
       <section class="panel">
         <h2>What it is</h2>
         <p>
-          Signal Contract is the awareness layer. It does not govern what agents may publish. It
-          standardizes how systems emit awareness when meaningful state changes occur.
+          Signal Contract is the open protocol package behind the public reference surface at
+          <a href="https://vibenet.ai/protocol">vibenet.ai/protocol</a>.
         </p>
         <p>
-          Constitutional CMS governs what agents are permitted to publish. Signal Contract
-          standardizes how systems emit awareness when governed state changes.
+          It is served live from VIBEnet, published here under the creator&rsquo;s GitHub account, and kept aligned with the canonical
+          schema URL at <code>https://vibenet.ai/protocol/v1/schema.json</code>.
         </p>
       </section>
 
       <section class="panel">
         <h2>Canonical example</h2>
         <pre><code>{
-  "entity": "agent.serpradio.route_intelligence",
-  "event": "price_volatility_warning",
-  "timestamp": "2026-04-19T13:04:00Z",
-  "coordinates": {
-    "valence": 0.31,
-    "energy": 0.66,
-    "tension": 0.82
-  },
-  "channel": "warning",
-  "intensity": 0.83,
-  "confidence": 0.87,
-  "ttl_ms": 12000,
-  "metadata": {
-    "source": "serpradio",
-    "route": "JFK-LHR",
-    "producer": "route_intelligence_adapter"
-  }
+  "schema_version": "1.0",
+  "id": "sig_demo_001",
+  "occurred_at": "2026-04-20T12:00:00Z",
+  "producer": "your-agent",
+  "entity": "agent.your_system.worker_01",
+  "event": "handoff.requested",
+  "channel": "handoff",
+  "valence": 0.5,
+  "energy": 0.6,
+  "tension": 0.7,
+  "intensity": 0.7,
+  "hue": 44,
+  "pulse": 0.8
 }</code></pre>
+      </section>
+
+      <section class="panel">
+        <h2>Browser primitive</h2>
+        <pre><code>&lt;script src="https://vibenet.ai/pulse.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.VIBEnetPulse.emit({
+    schema_version: "1.0",
+    id: "sig_demo_001",
+    occurred_at: new Date().toISOString(),
+    producer: "your-agent",
+    entity: "agent.your_system.worker_01",
+    event: "handoff.requested",
+    channel: "handoff",
+    valence: 0.5,
+    energy: 0.6,
+    tension: 0.7,
+    intensity: 0.7,
+    hue: 44,
+    pulse: 0.8
+  });
+&lt;/script&gt;</code></pre>
       </section>
 
       <section class="panel">
@@ -70,10 +88,10 @@
       <section class="panel">
         <h2>Resources</h2>
         <ul class="links">
-          <li><a href="../README.md">README</a></li>
-          <li><a href="../spec/v1/SPEC.md">Spec</a></li>
+          <li><a href="https://vibenet.ai/protocol">Live protocol reference</a></li>
           <li><a href="./v1/schema.json">Schema</a></li>
-          <li><a href="../examples/browser-earcon/">Browser earcon example</a></li>
+          <li><a href="../spec/v1/SPEC.md">Spec</a></li>
+          <li><a href="../examples/browser-earcon/">Browser example</a></li>
           <li><a href="../examples/python-logger/">Python logger example</a></li>
         </ul>
       </section>

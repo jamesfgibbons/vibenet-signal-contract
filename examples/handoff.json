@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "id": "sig_logger_handoff_001",
-  "occurred_at": "2026-04-20T12:15:00Z",
-  "producer": "example.logger",
-  "entity": "agent.example.supervisor",
+  "id": "sig_handoff_001",
+  "occurred_at": "2026-04-20T12:06:00Z",
+  "producer": "example.agent",
+  "entity": "agent.example.worker_01",
   "event": "handoff.requested",
   "channel": "handoff",
   "valence": 0.54,
@@ -13,6 +13,6 @@
   "hue": 278,
   "pulse": 0.72,
   "metadata": {
-    "receiver": "human_reviewer"
+    "receiver": "human.operator"
   }
 }

@@ -1,6 +1,6 @@
-# Browser earcon example
+# Browser example
 
-This example fetches a sample Signal Contract object, renders its values in the DOM, and plays a small Web Audio earcon when the user clicks play.
+This example fetches a flat Signal Contract v1 object, renders its state dimensions in the DOM, and plays a small Web Audio earcon when the user clicks play.
 
 Run from the repo root:
 

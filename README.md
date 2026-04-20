@@ -1,75 +1,73 @@
-# Signal Contract
+# VIBEnet Signal Contract
 
-Signal Contract is a public protocol for awareness events emitted by agents, data systems, and devices.
-
-It standardizes one small JSON object that producers can emit and renderers can consume without sharing a backend, framework, or internal taxonomy.
+VIBEnet Signal Contract is a flat JSON event object for renderer-facing agent awareness.
 
 **One JSON object. Many renderers. No shared backend required.**
+
+This repo is the public source package for the open protocol served live at [vibenet.ai/protocol](https://vibenet.ai/protocol). It is hosted under the publisher's GitHub account, but the product and protocol brand remain VIBEnet.
 
 ## Canonical example
 
 ```json
 {
-  "entity": "agent.serpradio.route_intelligence",
-  "event": "price_volatility_warning",
-  "timestamp": "2026-04-19T13:04:00Z",
-  "coordinates": {
-    "valence": 0.31,
-    "energy": 0.66,
-    "tension": 0.82
-  },
-  "channel": "warning",
-  "intensity": 0.83,
-  "confidence": 0.87,
-  "ttl_ms": 12000,
-  "metadata": {
-    "source": "serpradio",
-    "route": "JFK-LHR",
-    "producer": "route_intelligence_adapter"
-  }
+  "schema_version": "1.0",
+  "id": "sig_demo_001",
+  "occurred_at": "2026-04-20T12:00:00Z",
+  "producer": "your-agent",
+  "entity": "agent.your_system.worker_01",
+  "event": "handoff.requested",
+  "channel": "handoff",
+  "valence": 0.5,
+  "energy": 0.6,
+  "tension": 0.7,
+  "intensity": 0.7,
+  "hue": 44,
+  "pulse": 0.8
 }
 ```
 
-## Positioning
+## The shape
 
-- `constitutional-cms` is governance. It defines what agents are permitted to publish.
-- `signal-contract` is awareness protocol. It defines the event object emitted when governed state changes.
-- Renderers and adapters are downstream consumers. A browser earcon, a logger, a device surface, a voice agent, or an MCP tool can all consume the same object.
+Signal Contract v1 standardizes:
 
-Constitutional CMS governs what agents are permitted to publish. Signal Contract standardizes how systems emit awareness when governed state changes.
+- one flat awareness event object
+- six renderer-facing state fields: `valence`, `energy`, `tension`, `intensity`, `hue`, `pulse`
+- seven semantic channels: `nominal`, `advisory`, `warning`, `critical`, `recovery`, `opportunity`, `handoff`
 
-## What v1 standardizes
+The protocol does **not** define transport, auth, storage, orchestration, or renderer internals.
 
-- A renderer-facing JSON object
-- Public-safe semantic channels
-- VET-style coordinates without exposing formulas
-- TTL and confidence semantics
-- Schema validation, fixtures, and reference examples
+## Browser primitive
 
-Signal Contract does not prescribe storage, orchestration, authentication, transport, or deployment topology.
+The live browser primitive is served from [vibenet.ai/pulse.js](https://vibenet.ai/pulse.js):
 
-## Public channels
+```html
+<script src="https://vibenet.ai/pulse.js"></script>
+<script>
+  window.VIBEnetPulse.emit({
+    schema_version: "1.0",
+    id: "sig_demo_001",
+    occurred_at: new Date().toISOString(),
+    producer: "your-agent",
+    entity: "agent.your_system.worker_01",
+    event: "handoff.requested",
+    channel: "handoff",
+    valence: 0.5,
+    energy: 0.6,
+    tension: 0.7,
+    intensity: 0.7,
+    hue: 44,
+    pulse: 0.8
+  });
+</script>
+```
 
-Signal Contract v1 uses seven public semantic channels:
+## Resources
 
-- `nominal`
-- `advisory`
-- `warning`
-- `critical`
-- `recovery`
-- `opportunity`
-- `handoff`
-
-If you run a richer private taxonomy, map it to these public channels at the producer boundary.
-
-## Repo layout
-
-- [`spec/v1/SPEC.md`](/Users/jamesfgibbons/Documents/Targeted%20Impressions%20Hub/signal-contract/spec/v1/SPEC.md)
-- [`spec/v1/schema.json`](/Users/jamesfgibbons/Documents/Targeted%20Impressions%20Hub/signal-contract/spec/v1/schema.json)
-- [`examples/browser-earcon/`](/Users/jamesfgibbons/Documents/Targeted%20Impressions%20Hub/signal-contract/examples/browser-earcon)
-- [`examples/python-logger/`](/Users/jamesfgibbons/Documents/Targeted%20Impressions%20Hub/signal-contract/examples/python-logger)
-- [`tests/`](/Users/jamesfgibbons/Documents/Targeted%20Impressions%20Hub/signal-contract/tests)
-- [`site/`](/Users/jamesfgibbons/Documents/Targeted%20Impressions%20Hub/signal-contract/site)
+- [Live protocol reference](https://vibenet.ai/protocol)
+- [`spec/v1/schema.json`](spec/v1/schema.json)
+- [`spec/v1/SPEC.md`](spec/v1/SPEC.md)
+- [`examples/`](examples/)
+- [`site/`](site/)
 
 ## Quick start
 
@@ -80,7 +78,7 @@ python3 -m pip install jsonschema
 python3 -m unittest tests.test_schema -v
 ```
 
-### Run the browser earcon example
+### Run the browser example
 
 ```bash
 python3 -m http.server 8000
@@ -97,18 +95,27 @@ Then open:
 python3 examples/python-logger/main.py examples/python-logger/sample_signal.json
 ```
 
-## Scope guardrails
+## Manual dual-publish rule
 
-This repo does not include:
+For now, the protocol is dual-published:
 
-- private channel letters
-- VET formulas
-- Constitutional CMS production contracts
-- Soul Bank internals
-- Sonafide references
-- renderer certification
-- hosted validator services
-- commercial support surfaces
+- this repo contains the public source package
+- `vibenet.ai` serves the live schema at `https://vibenet.ai/protocol/v1/schema.json`
+
+Any schema change must update both copies in lockstep:
+
+- [`spec/v1/schema.json`](spec/v1/schema.json)
+- [`site/v1/schema.json`](site/v1/schema.json)
+- the served copy in `vibenet-frontend/public/protocol/v1/schema.json`
+
+The canonical web URL remains `https://vibenet.ai/protocol/v1/schema.json`.
+
+## Versioning
+
+Signal Contract v1 is additive-stable:
+
+- minor versions may add optional fields
+- major versions are required for required-field changes, enum removals, or semantic redefinitions
 
 ## License
 

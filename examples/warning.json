@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "id": "sig_warning_001",
+  "occurred_at": "2026-04-20T12:02:00Z",
+  "producer": "example.agent",
+  "entity": "agent.example.worker_01",
+  "event": "source_confidence.dropped",
+  "channel": "warning",
+  "valence": 0.38,
+  "energy": 0.74,
+  "tension": 0.76,
+  "intensity": 0.78,
+  "hue": 44,
+  "pulse": 0.82,
+  "confidence": 0.68,
+  "ttl_ms": 15000,
+  "metadata": {
+    "reason": "source_confidence_below_threshold"
+  }
+}

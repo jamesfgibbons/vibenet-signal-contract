@@ -1,128 +1,60 @@
 [
   {
-    "name": "nominal_minimum_intensity_zero_ttl",
+    "name": "minimum_valid_no_optionals",
     "payload": {
-      "entity": "system.renderer.browser",
-      "event": "baseline_restored",
-      "timestamp": "2026-04-19T13:06:00Z",
-      "coordinates": {
-        "valence": 0.5,
-        "energy": 0.0,
-        "tension": 0.0
-      },
+      "schema_version": "1.0",
+      "id": "sig_edge_001",
+      "occurred_at": "2026-04-20T12:12:00Z",
+      "producer": "example.edge",
+      "entity": "agent.example.worker_01",
+      "event": "agent.idle",
       "channel": "nominal",
-      "intensity": 0.0,
-      "ttl_ms": 0,
-      "metadata": {}
+      "valence": 0,
+      "energy": 0,
+      "tension": 0,
+      "intensity": 0,
+      "hue": 0,
+      "pulse": 0
     }
   },
   {
-    "name": "advisory_max_ttl",
+    "name": "maximum_normalized_values",
     "payload": {
-      "entity": "agent.review.pipeline",
-      "event": "manual_review_suggested",
-      "timestamp": "2026-04-19T13:06:10Z",
-      "coordinates": {
-        "valence": 0.46,
-        "energy": 0.32,
-        "tension": 0.41
-      },
-      "channel": "advisory",
-      "intensity": 0.27,
-      "confidence": 0.51,
+      "schema_version": "1.0",
+      "id": "sig_edge_002",
+      "occurred_at": "2026-04-20T12:13:00Z",
+      "producer": "example.edge",
+      "entity": "agent.example.worker_01",
+      "event": "circuit_breaker_open",
+      "channel": "critical",
+      "valence": 1,
+      "energy": 1,
+      "tension": 1,
+      "intensity": 1,
+      "hue": 360,
+      "pulse": 1,
+      "confidence": 1,
       "ttl_ms": 2147483647,
       "metadata": {}
     }
   },
   {
-    "name": "warning_example",
+    "name": "zero_ttl_allowed",
     "payload": {
-      "entity": "agent.serpradio.route_intelligence",
-      "event": "price_volatility_warning",
-      "timestamp": "2026-04-19T13:06:20Z",
-      "coordinates": {
-        "valence": 0.31,
-        "energy": 0.66,
-        "tension": 0.82
-      },
-      "channel": "warning",
-      "intensity": 0.83,
-      "ttl_ms": 12000,
-      "metadata": {}
-    }
-  },
-  {
-    "name": "critical_max_intensity",
-    "payload": {
-      "entity": "system.production.gateway",
-      "event": "circuit_breaker_open",
-      "timestamp": "2026-04-19T13:06:30Z",
-      "coordinates": {
-        "valence": 0.08,
-        "energy": 0.97,
-        "tension": 0.99
-      },
-      "channel": "critical",
-      "intensity": 1.0,
-      "confidence": 1.0,
-      "ttl_ms": 8000,
-      "metadata": {}
-    }
-  },
-  {
-    "name": "recovery_empty_metadata",
-    "payload": {
-      "entity": "workflow.repair.loop",
-      "event": "service_recovered",
-      "timestamp": "2026-04-19T13:06:40Z",
-      "coordinates": {
-        "valence": 0.74,
-        "energy": 0.38,
-        "tension": 0.15
-      },
-      "channel": "recovery",
-      "intensity": 0.34,
-      "ttl_ms": 30000,
-      "metadata": {}
-    }
-  },
-  {
-    "name": "opportunity_omitted_confidence",
-    "payload": {
-      "entity": "domain.route.jfk-lhr",
-      "event": "rare_alignment_detected",
-      "timestamp": "2026-04-19T13:06:50Z",
-      "coordinates": {
-        "valence": 0.88,
-        "energy": 0.61,
-        "tension": 0.24
-      },
-      "channel": "opportunity",
-      "intensity": 0.72,
-      "ttl_ms": 45000,
-      "metadata": {
-        "route": "JFK-LHR"
-      }
-    }
-  },
-  {
-    "name": "handoff_with_metadata",
-    "payload": {
-      "entity": "agent.ops.summarizer",
-      "event": "operator_handoff_ready",
-      "timestamp": "2026-04-19T13:07:00Z",
-      "coordinates": {
-        "valence": 0.63,
-        "energy": 0.43,
-        "tension": 0.29
-      },
-      "channel": "handoff",
-      "intensity": 0.48,
-      "confidence": 0.76,
-      "ttl_ms": 15000,
-      "metadata": {
-        "handoff_to": "human.operator.alpha"
-      }
+      "schema_version": "1.0",
+      "id": "sig_edge_003",
+      "occurred_at": "2026-04-20T12:14:00Z",
+      "producer": "example.edge",
+      "entity": "agent.example.worker_01",
+      "event": "instant_notice",
+      "channel": "advisory",
+      "valence": 0.4,
+      "energy": 0.3,
+      "tension": 0.2,
+      "intensity": 0.2,
+      "hue": 205,
+      "pulse": 0.4,
+      "ttl_ms": 0
     }
   }
 ]

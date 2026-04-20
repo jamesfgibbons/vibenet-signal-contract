@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "id": "sig_advisory_001",
+  "occurred_at": "2026-04-20T12:01:00Z",
+  "producer": "example.agent",
+  "entity": "agent.example.worker_01",
+  "event": "tool_call.issued",
+  "channel": "advisory",
+  "valence": 0.56,
+  "energy": 0.6,
+  "tension": 0.34,
+  "intensity": 0.52,
+  "hue": 205,
+  "pulse": 0.52,
+  "metadata": {
+    "tool": "search"
+  }
+}

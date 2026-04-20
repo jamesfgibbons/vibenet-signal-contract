@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "id": "sig_recovery_001",
+  "occurred_at": "2026-04-20T12:04:00Z",
+  "producer": "example.agent",
+  "entity": "agent.example.worker_01",
+  "event": "fallback.restored",
+  "channel": "recovery",
+  "valence": 0.72,
+  "energy": 0.48,
+  "tension": 0.22,
+  "intensity": 0.46,
+  "hue": 118,
+  "pulse": 0.44,
+  "metadata": {}
+}

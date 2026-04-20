@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "id": "sig_critical_001",
+  "occurred_at": "2026-04-20T12:03:00Z",
+  "producer": "example.agent",
+  "entity": "agent.example.worker_01",
+  "event": "guardrail.blocked",
+  "channel": "critical",
+  "valence": 0.18,
+  "energy": 0.92,
+  "tension": 0.96,
+  "intensity": 0.94,
+  "hue": 355,
+  "pulse": 0.94,
+  "ttl_ms": 8000,
+  "metadata": {
+    "boundary": "publish_policy"
+  }
+}

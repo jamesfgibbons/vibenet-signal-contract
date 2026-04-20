@@ -3,16 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Signal Contract Browser Earcon</title>
+    <title>VIBEnet Signal Contract Browser Example</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <main class="shell">
-      <p class="eyebrow">SIGNAL CONTRACT EXAMPLE</p>
+      <p class="eyebrow">VIBENET SIGNAL CONTRACT EXAMPLE</p>
       <h1>Browser earcon</h1>
-      <p class="lede">One signal object drives a visual card and a tiny earcon with no shared backend.</p>
+      <p class="lede">One flat signal object drives a visual card and a tiny earcon with no shared backend.</p>
 
       <section class="card">
+        <div class="row">
+          <span>Occurred at</span>
+          <strong id="occurredAt">-</strong>
+        </div>
+        <div class="row">
+          <span>Producer</span>
+          <strong id="producer">-</strong>
+        </div>
         <div class="row">
           <span>Entity</span>
           <strong id="entity">-</strong>
@@ -26,12 +34,12 @@
           <strong id="channel">-</strong>
         </div>
         <div class="row">
-          <span>Intensity</span>
-          <strong id="intensity">-</strong>
+          <span>State</span>
+          <strong id="state">-</strong>
         </div>
         <div class="row">
-          <span>Coordinates</span>
-          <strong id="coordinates">-</strong>
+          <span>Render hints</span>
+          <strong id="renderHints">-</strong>
         </div>
         <button id="play" type="button">Play earcon</button>
       </section>

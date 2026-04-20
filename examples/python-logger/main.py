@@ -11,19 +11,22 @@ def load_signal(path: Path) -> dict:
 
 
 def describe(signal: dict) -> str:
-    coords = signal["coordinates"]
     confidence = signal.get("confidence")
     confidence_text = f" confidence={confidence:.2f}" if isinstance(confidence, (int, float)) else ""
+    ttl_text = f" ttl_ms={signal['ttl_ms']}" if "ttl_ms" in signal else ""
     return (
-        f"[{signal['timestamp']}] "
+        f"[{signal['occurred_at']}] "
         f"{signal['channel'].upper()} "
-        f"{signal['entity']} "
+        f"producer={signal['producer']} "
+        f"entity={signal['entity']} "
         f"event={signal['event']} "
         f"intensity={signal['intensity']:.2f} "
-        f"V={coords['valence']:.2f} "
-        f"E={coords['energy']:.2f} "
-        f"T={coords['tension']:.2f} "
-        f"ttl_ms={signal['ttl_ms']}"
+        f"V={signal['valence']:.2f} "
+        f"E={signal['energy']:.2f} "
+        f"T={signal['tension']:.2f} "
+        f"hue={signal['hue']:.0f} "
+        f"pulse={signal['pulse']:.2f}"
+        f"{ttl_text}"
         f"{confidence_text}"
     )
 

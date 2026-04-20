@@ -49,6 +49,13 @@ class SignalContractSchemaTests(unittest.TestCase):
                 errors = sorted(self.validator.iter_errors(case["payload"]), key=lambda error: list(error.path))
                 self.assertEqual(errors, [])
 
+    def test_top_level_channel_examples_pass(self):
+        for path in sorted((ROOT / "examples").glob("*.json")):
+            with self.subTest(example=path.name):
+                payload = load_json(path)
+                errors = sorted(self.validator.iter_errors(payload), key=lambda error: list(error.path))
+                self.assertEqual(errors, [])
+
     def test_browser_example_signal_passes(self):
         payload = load_json(ROOT / "examples" / "browser-earcon" / "sample-signal.json")
         errors = sorted(self.validator.iter_errors(payload), key=lambda error: list(error.path))

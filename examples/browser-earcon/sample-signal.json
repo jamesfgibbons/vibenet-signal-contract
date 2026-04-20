@@ -1,19 +1,21 @@
 {
-  "entity": "agent.serpradio.route_intelligence",
-  "event": "price_volatility_warning",
-  "timestamp": "2026-04-19T13:04:00Z",
-  "coordinates": {
-    "valence": 0.31,
-    "energy": 0.66,
-    "tension": 0.82
-  },
+  "schema_version": "1.0",
+  "id": "sig_browser_warning_001",
+  "occurred_at": "2026-04-20T12:10:00Z",
+  "producer": "example.browser",
+  "entity": "agent.example.worker_01",
+  "event": "tool_call.issued",
   "channel": "warning",
-  "intensity": 0.83,
-  "confidence": 0.87,
+  "valence": 0.33,
+  "energy": 0.72,
+  "tension": 0.79,
+  "intensity": 0.76,
+  "hue": 44,
+  "pulse": 0.82,
+  "confidence": 0.86,
   "ttl_ms": 12000,
   "metadata": {
-    "source": "serpradio",
-    "route": "JFK-LHR",
-    "producer": "route_intelligence_adapter"
+    "tool": "web_search",
+    "source": "browser-example"
   }
 }

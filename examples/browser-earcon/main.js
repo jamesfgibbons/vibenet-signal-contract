@@ -8,17 +8,22 @@ const channelToneMap = {
   handoff: 392.0
 };
 
-function formatCoordinates(signal) {
-  const { valence, energy, tension } = signal.coordinates;
-  return `V ${valence.toFixed(2)} / E ${energy.toFixed(2)} / T ${tension.toFixed(2)}`;
+function formatState(signal) {
+  return `V ${signal.valence.toFixed(2)} / E ${signal.energy.toFixed(2)} / T ${signal.tension.toFixed(2)}`;
+}
+
+function formatRenderHints(signal) {
+  return `I ${signal.intensity.toFixed(2)} / H ${signal.hue.toFixed(0)} / P ${signal.pulse.toFixed(2)}`;
 }
 
 function bindSignal(signal) {
+  document.getElementById("occurredAt").textContent = signal.occurred_at;
+  document.getElementById("producer").textContent = signal.producer;
   document.getElementById("entity").textContent = signal.entity;
   document.getElementById("event").textContent = signal.event;
   document.getElementById("channel").textContent = signal.channel;
-  document.getElementById("intensity").textContent = signal.intensity.toFixed(2);
-  document.getElementById("coordinates").textContent = formatCoordinates(signal);
+  document.getElementById("state").textContent = formatState(signal);
+  document.getElementById("renderHints").textContent = formatRenderHints(signal);
 }
 
 async function playEarcon(signal) {
@@ -33,7 +38,7 @@ async function playEarcon(signal) {
   oscillator.type = signal.channel === "warning" || signal.channel === "critical" ? "sawtooth" : "sine";
   oscillator.frequency.value = channelToneMap[signal.channel] ?? 220;
   filter.type = "lowpass";
-  filter.frequency.value = 900 + signal.intensity * 1400;
+  filter.frequency.value = 900 + signal.intensity * 1400 + signal.pulse * 180;
 
   gain.gain.setValueAtTime(0.0001, context.currentTime);
   gain.gain.exponentialRampToValueAtTime(Math.max(0.02, signal.intensity * 0.16), context.currentTime + 0.03);

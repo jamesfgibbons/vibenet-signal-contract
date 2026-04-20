@@ -2,41 +2,41 @@
   {
     "name": "canonical_readme_example",
     "payload": {
-      "entity": "agent.serpradio.route_intelligence",
-      "event": "price_volatility_warning",
-      "timestamp": "2026-04-19T13:04:00Z",
-      "coordinates": {
-        "valence": 0.31,
-        "energy": 0.66,
-        "tension": 0.82
-      },
-      "channel": "warning",
-      "intensity": 0.83,
-      "confidence": 0.87,
-      "ttl_ms": 12000,
-      "metadata": {
-        "source": "serpradio",
-        "route": "JFK-LHR",
-        "producer": "route_intelligence_adapter"
-      }
+      "schema_version": "1.0",
+      "id": "sig_demo_001",
+      "occurred_at": "2026-04-20T12:00:00Z",
+      "producer": "your-agent",
+      "entity": "agent.your_system.worker_01",
+      "event": "handoff.requested",
+      "channel": "handoff",
+      "valence": 0.5,
+      "energy": 0.6,
+      "tension": 0.7,
+      "intensity": 0.7,
+      "hue": 44,
+      "pulse": 0.8
     }
   },
   {
-    "name": "handoff_without_confidence",
+    "name": "full_warning_object",
     "payload": {
-      "entity": "device.browser.overview_panel",
-      "event": "operator_handoff_ready",
-      "timestamp": "2026-04-19T13:05:00Z",
-      "coordinates": {
-        "valence": 0.57,
-        "energy": 0.44,
-        "tension": 0.28
-      },
-      "channel": "handoff",
-      "intensity": 0.45,
-      "ttl_ms": 5000,
+      "schema_version": "1.0",
+      "id": "sig_warning_full_001",
+      "occurred_at": "2026-04-20T12:02:00Z",
+      "producer": "example.agent",
+      "entity": "agent.example.worker_01",
+      "event": "source_confidence.dropped",
+      "channel": "warning",
+      "valence": 0.38,
+      "energy": 0.74,
+      "tension": 0.76,
+      "intensity": 0.78,
+      "hue": 44,
+      "pulse": 0.82,
+      "confidence": 0.68,
+      "ttl_ms": 15000,
       "metadata": {
-        "target": "ops.shift_b"
+        "reason": "source_confidence_below_threshold"
       }
     }
   }
