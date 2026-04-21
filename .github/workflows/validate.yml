@@ -21,3 +21,6 @@ jobs:
 
       - name: Run schema tests
         run: python -m unittest tests.test_schema -v
+
+      - name: Confirm spec and site schemas stay identical
+        run: diff -u spec/v1/schema.json site/v1/schema.json
