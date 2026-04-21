@@ -36,6 +36,19 @@ Signal Contract v1 standardizes:
 
 The protocol does **not** define transport, auth, storage, orchestration, or renderer internals.
 
+## Metadata convention
+
+Signal Contract v1 keeps publishability and indexability inside `metadata` as
+an optional convention:
+
+- `metadata.publishable` says whether an event is fit for direct human surfacing
+- `metadata.indexable` says whether an event is fit for machine citation, caching, or reference
+- `metadata.fallback_reason` explains a non-publishable fallback state when useful
+
+The flags are independent. Consumers that ignore them should treat events as
+both publishable and indexable by default. The convention does not add required
+fields or change `schema_version`.
+
 ## Browser primitive
 
 The live browser primitive is served from [vibenet.ai/pulse.js](https://vibenet.ai/pulse.js):

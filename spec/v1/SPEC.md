@@ -58,7 +58,7 @@ This keeps the contract usable across browsers, loggers, earcons, voice systems,
 | --- | --- | --- |
 | `confidence` | `number` | Optional producer confidence from `0.0` to `1.0` |
 | `ttl_ms` | `integer` | Optional time-to-live in milliseconds |
-| `metadata` | `object` | Optional extra context container, allowed to be empty |
+| `metadata` | `object` | Optional extra context container, allowed to be empty; v1 metadata conventions may live here |
 
 ## Public channels
 
@@ -103,6 +103,63 @@ Signal Contract v1 exposes the public state dimensions. It does not expose the i
 - renderer-safe contextual details
 
 Renderers must not depend on `metadata` for core protocol validity.
+
+### Publishability and indexability convention
+
+Signal Contract v1 recognizes three optional metadata keys for events that
+represent produced artifacts, fallback states, public receipts, or citation
+surfaces:
+
+| Metadata key | Type | Meaning |
+| --- | --- | --- |
+| `publishable` | `boolean` | Whether the event represents content fit for direct human surfacing |
+| `indexable` | `boolean` | Whether the event represents content fit for machine citation, caching, or reference accumulation |
+| `fallback_reason` | `string` | Optional explanation when an event is not publishable, especially when it remains indexable |
+
+`publishable` and `indexable` are independent. An event may be both
+publishable and indexable, publishable but not indexable, indexable but not
+publishable, or neither. A fallback state can therefore remain valid evidence
+for machines while being withheld from direct human presentation.
+
+Consumers that do not understand this convention should treat absent or ignored
+values as equivalent to:
+
+```json
+{
+  "publishable": true,
+  "indexable": true
+}
+```
+
+This preserves backward compatibility with v1 renderers that ignore metadata.
+The convention does not add required fields and does not promote these keys to
+the top-level event object.
+
+Canonical fallback example:
+
+```json
+{
+  "schema_version": "1.0",
+  "id": "sig_route_fallback_001",
+  "occurred_at": "2026-04-20T12:00:00Z",
+  "producer": "serpradio.route_intelligence",
+  "entity": "route.jfk_lhr",
+  "event": "snapshot.fallback_served",
+  "channel": "advisory",
+  "valence": 0.45,
+  "energy": 0.3,
+  "tension": 0.5,
+  "intensity": 0.4,
+  "hue": 200,
+  "pulse": 0.35,
+  "metadata": {
+    "publishable": false,
+    "indexable": true,
+    "fallback_reason": "primary_source_stale",
+    "route": "JFK-LHR"
+  }
+}
+```
 
 ## Renderer stance
 

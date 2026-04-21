@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "id": "sig_route_fallback_001",
+  "occurred_at": "2026-04-20T12:00:00Z",
+  "producer": "serpradio.route_intelligence",
+  "entity": "route.jfk_lhr",
+  "event": "snapshot.fallback_served",
+  "channel": "advisory",
+  "valence": 0.45,
+  "energy": 0.3,
+  "tension": 0.5,
+  "intensity": 0.4,
+  "hue": 200,
+  "pulse": 0.35,
+  "metadata": {
+    "publishable": false,
+    "indexable": true,
+    "fallback_reason": "primary_source_stale",
+    "route": "JFK-LHR"
+  }
+}

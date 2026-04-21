@@ -114,7 +114,7 @@
     },
     "metadata": {
       "type": "object",
-      "description": "Optional contextual metadata. Empty object allowed.",
+      "description": "Optional contextual metadata. Empty object allowed. v1 metadata conventions may include optional publishable, indexable, and fallback_reason keys; the schema does not require or constrain them.",
       "default": {}
     }
   }
