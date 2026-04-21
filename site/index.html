@@ -86,6 +86,18 @@
       </section>
 
       <section class="panel">
+        <h2>Metadata convention</h2>
+        <p>
+          v1 events may use <code>metadata.publishable</code>, <code>metadata.indexable</code>, and
+          <code>metadata.fallback_reason</code> to distinguish content fit for human surfacing from evidence fit for
+          machine citation. These keys are optional and remain inside <code>metadata</code>.
+        </p>
+        <p>
+          Consumers that ignore the convention should treat events as both publishable and indexable by default.
+        </p>
+      </section>
+
+      <section class="panel">
         <h2>Resources</h2>
         <ul class="links">
           <li><a href="https://vibenet.ai/protocol">Live protocol reference</a></li>
