@@ -174,10 +174,6 @@ Signal Contract is renderer-agnostic. The same object can feed:
 
 The contract does not require a shared backend. It only requires a producer and a consumer that agree on the object.
 
-## Relationship to governance
-
-Constitutional CMS governs what agents are permitted to publish. Signal Contract standardizes how systems emit awareness when governed state changes.
-
 ## Explicit non-goals in v1
 
 Signal Contract v1 does not define:
