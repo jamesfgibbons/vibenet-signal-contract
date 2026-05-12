@@ -1,0 +1,114 @@
+---
+# Home Assistant Blueprint for the VIBEnet Signal Contract → Google Home bridge.
+# Primary implementation path for the google-home-bridge renderer.
+#
+# Setup:
+#   1. Copy this file to ~/.homeassistant/blueprints/automation/vibenet/
+#   2. In Home Assistant UI: Settings → Automations → Create Automation
+#      → Use Blueprint → "VIBEnet Signal Contract Announcement"
+#   3. Fill the inputs: which media_player target, which channels to announce,
+#      and the webhook secret.
+#   4. The bridge.py service then POSTs to:
+#        https://YOUR_HA_HOST/api/webhook/<webhook_id>
+#      Set HA_WEBHOOK_URL to that URL.
+
+blueprint:
+  name: VIBEnet Signal Contract Announcement
+  description: >
+    Render a VIBEnet Signal Contract v1 event as a Google Cast TTS announcement.
+    The bridge.py service applies the channel-based attention policy upstream;
+    this blueprint accepts already-policy-filtered events and speaks them.
+  domain: automation
+  input:
+    media_player_target:
+      name: Google Home / Nest device
+      description: The Google Cast media_player entity to speak to.
+      selector:
+        entity:
+          domain: media_player
+          integration: cast
+    webhook_id:
+      name: Webhook identifier
+      description: >
+        Random string used in the webhook URL. The bridge POSTs to
+        /api/webhook/<webhook_id>. Generate with `uuidgen` or similar.
+      selector:
+        text:
+    tts_service:
+      name: TTS service
+      description: >
+        Which Home Assistant TTS service to use (e.g. google_translate_say,
+        cloud_say, openai_tts_say). Must be installed and configured.
+      default: google_translate_say
+      selector:
+        text:
+    quiet_hours_start:
+      name: Quiet hours start
+      description: >
+        Time after which only critical channel announcements are spoken.
+        Other channels are logged but silenced. Leave blank to disable
+        quiet hours.
+      default: "22:00"
+      selector:
+        time:
+    quiet_hours_end:
+      name: Quiet hours end
+      default: "07:00"
+      selector:
+        time:
+
+trigger:
+  - platform: webhook
+    webhook_id: !input webhook_id
+    allowed_methods:
+      - POST
+    local_only: false
+
+variables:
+  payload: "{{ trigger.json }}"
+  channel: "{{ payload.channel | default('advisory') }}"
+  announcement: "{{ payload.announcement | default('VIBEnet signal received with no announcement text.') }}"
+  event_id: "{{ payload.event_id | default('unknown') }}"
+
+action:
+  - choose:
+      # Always speak critical, regardless of quiet hours
+      - conditions:
+          - "{{ channel == 'critical' }}"
+        sequence:
+          - service: "tts.{{ tts_service }}"
+            data:
+              entity_id: !input media_player_target
+              message: "{{ announcement }}"
+          - service: logbook.log
+            data:
+              name: "VIBEnet"
+              message: "Spoke critical: {{ event_id }}"
+
+      # Speak warning/recovery/handoff outside quiet hours
+      - conditions:
+          - "{{ channel in ['warning', 'recovery', 'handoff'] }}"
+          - condition: time
+            after: !input quiet_hours_end
+            before: !input quiet_hours_start
+        sequence:
+          - service: "tts.{{ tts_service }}"
+            data:
+              entity_id: !input media_player_target
+              message: "{{ announcement }}"
+          - service: logbook.log
+            data:
+              name: "VIBEnet"
+              message: "Spoke {{ channel }}: {{ event_id }}"
+
+      # Quiet hours: log but don't speak (the bridge already filtered
+      # nominal/advisory/opportunity — these are channels that elected
+      # to speak but quiet hours overrides)
+    default:
+      - service: logbook.log
+        data:
+          name: "VIBEnet"
+          message: "Silenced {{ channel }} during quiet hours: {{ event_id }}"
+
+mode: parallel
+max: 10

@@ -1,0 +1,89 @@
+---
+renderer_id: google-home-bridge
+renderer_family: home-voice
+schema_version: "1.0"
+
+# The seven public Signal Contract channels each get a deliberate decision.
+# The intersection of supported + ignored_by_design is empty; the union is the
+# full public channel set.
+channels_supported:
+  - warning
+  - critical
+  - recovery
+  - handoff
+
+channels_ignored_by_design:
+  - nominal
+  - advisory
+  - opportunity
+
+# L1 = handles all seven channels without throwing. Verified by
+# conformance/l1/run.py against a deployed instance of this renderer.
+conformance_self_claim: L1
+conformance_test_command: "python conformance/l1/run.py --renderer-url $RENDERER_URL"
+
+# Two routing paths ship with the reference. Implementers pick based on
+# infrastructure. The renderer is identical; only the downstream hop differs.
+implementation_paths:
+  - id: home-assistant-primary
+    priority: 1
+    requires: ["Home Assistant instance with a Google Cast media_player target"]
+    config_env_var: HA_WEBHOOK_URL
+    docs: ha-blueprint.yaml
+  - id: ifttt-fallback
+    priority: 2
+    requires: ["IFTTT account, Maker Webhooks service connected to Google Assistant"]
+    config_env_var: IFTTT_WEBHOOK_URL
+    docs: ifttt-fallback/applet.md
+
+# Renderer-side discipline. Not part of the Signal Contract.
+# Documented here so implementers and policy-reviewers can audit what
+# this renderer will and won't say out loud.
+attention_policy:
+  default:
+    critical: speak
+    warning: speak
+    recovery: speak
+    handoff: speak
+    nominal: silent
+    advisory: silent
+    opportunity: silent
+  rationale: |
+    Voice is the highest-intrusion modality in a residential space.
+    Speaking on nominal/advisory/opportunity events is noise that trains
+    listeners to ignore the renderer. Speaking on critical/warning/recovery/
+    handoff matches the channel families designed for state-transition
+    attention.
+  override_mechanism: |
+    Per-device or per-user overrides via the bridge.py config file or
+    environment variables (ATTENTION_POLICY_OVERRIDE_<CHANNEL>=speak|silent).
+
+# Vendor-neutrality is structural, not aspirational.
+moat_implications: |
+  This renderer demonstrates that voice rendering is one expression of the
+  Signal Contract, not the contract itself. Alternative voice renderers
+  (Alexa, phone-TTS, Sonos cast, Ray-Ban audio, local Whisper-driven TTS)
+  are equally valid and welcome as sibling implementations in the
+  home-voice family. Renderer-side moats — sonic vocabulary quality,
+  prosody mapping, voice-personality authoring — are renderer-author
+  concerns, not protocol concerns.
+
+# Documentation surfaces.
+documentation:
+  readme: README.md
+  primary_path: ha-blueprint.yaml
+  fallback_path: ifttt-fallback/applet.md
+  canonical_event_examples: examples/serpclaw-demo.jsonl
+
+# Production proof.
+production_proof:
+  first_canonical_demo: |
+    SerpClaw warning event emitted 2026-05-12, announced through Nest Mini
+    via Home Assistant Cast integration. The same event remained valid
+    Signal Contract JSON, browser pulse (via the protocol page demo),
+    and audit trail entry. The "one event, many senses" claim is
+    demonstrated rather than asserted.
+
+# License
+license: Apache-2.0
+license_file: ../../LICENSE

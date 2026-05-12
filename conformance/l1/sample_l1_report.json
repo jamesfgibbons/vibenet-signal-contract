@@ -1,0 +1,80 @@
+{
+  "spec_version": "1.0",
+  "test_version": "l1.v1",
+  "renderer_url": "http://localhost:9595/event",
+  "timestamp": "2026-05-12T20:30:00Z",
+  "result": "pass",
+  "handled_channels": [
+    "advisory",
+    "critical",
+    "handoff",
+    "nominal",
+    "opportunity",
+    "recovery",
+    "warning"
+  ],
+  "unhandled_channels": [],
+  "per_channel_results": [
+    {
+      "channel": "nominal",
+      "event_id": "l1_nominal_001",
+      "http_status": 200,
+      "elapsed_ms": 11,
+      "error": null,
+      "response_body_excerpt": "{\"status\":\"handled\",\"channel\":\"nominal\",\"event_id\":\"l1_nominal_001\",\"action\":\"silent\"}"
+    },
+    {
+      "channel": "advisory",
+      "event_id": "l1_advisory_001",
+      "http_status": 200,
+      "elapsed_ms": 9,
+      "error": null,
+      "response_body_excerpt": "{\"status\":\"handled\",\"channel\":\"advisory\",\"event_id\":\"l1_advisory_001\",\"action\":\"silent\"}"
+    },
+    {
+      "channel": "warning",
+      "event_id": "l1_warning_001",
+      "http_status": 200,
+      "elapsed_ms": 142,
+      "error": null,
+      "response_body_excerpt": "{\"status\":\"handled\",\"channel\":\"warning\",\"event_id\":\"l1_warning_001\",\"action\":\"speak\",\"path\":\"home-assistant-primary\",\"http_status\":200}"
+    },
+    {
+      "channel": "critical",
+      "event_id": "l1_critical_001",
+      "http_status": 200,
+      "elapsed_ms": 138,
+      "error": null,
+      "response_body_excerpt": "{\"status\":\"handled\",\"channel\":\"critical\",\"event_id\":\"l1_critical_001\",\"action\":\"speak\",\"path\":\"home-assistant-primary\",\"http_status\":200}"
+    },
+    {
+      "channel": "recovery",
+      "event_id": "l1_recovery_001",
+      "http_status": 200,
+      "elapsed_ms": 144,
+      "error": null,
+      "response_body_excerpt": "{\"status\":\"handled\",\"channel\":\"recovery\",\"event_id\":\"l1_recovery_001\",\"action\":\"speak\",\"path\":\"home-assistant-primary\",\"http_status\":200}"
+    },
+    {
+      "channel": "opportunity",
+      "event_id": "l1_opportunity_001",
+      "http_status": 200,
+      "elapsed_ms": 9,
+      "error": null,
+      "response_body_excerpt": "{\"status\":\"handled\",\"channel\":\"opportunity\",\"event_id\":\"l1_opportunity_001\",\"action\":\"silent\"}"
+    },
+    {
+      "channel": "handoff",
+      "event_id": "l1_handoff_001",
+      "http_status": 200,
+      "elapsed_ms": 141,
+      "error": null,
+      "response_body_excerpt": "{\"status\":\"handled\",\"channel\":\"handoff\",\"event_id\":\"l1_handoff_001\",\"action\":\"speak\",\"path\":\"home-assistant-primary\",\"http_status\":200}"
+    }
+  ],
+  "harness": {
+    "events_file": "conformance/l1/events.jsonl",
+    "timeout_sec": 8
+  },
+  "implementer_note": "Reference report generated against google-home-bridge renderer in webhook mode with HA_WEBHOOK_URL configured to a Home Assistant test instance. Three of seven channels (nominal/advisory/opportunity) were handled silently per the renderer's attention policy — that is L1-conformant; the renderer accepted the event without throwing and returned 200. Four channels (warning/critical/recovery/handoff) routed to the HA webhook and returned 200 after the downstream Cast TTS dispatched."
+}
