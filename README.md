@@ -133,7 +133,3 @@ Signal Contract v1 is additive-stable:
 ## Conformance
 
 A producer conforms to v1 when every emitted object validates against `spec/v1/schema.json`. A renderer conforms to v1 when it handles all seven public semantic channels without throwing. Conformance does not require a specific sonic vocabulary.
-
-## License
-
-Apache-2.0
