@@ -1,0 +1,6 @@
+# google-home-bridge uses only the Python standard library at runtime.
+# urllib.request, http.server, socketserver, json, argparse, os, sys, time —
+# all stdlib. No pip dependencies required.
+#
+# Optional dev tooling for testing:
+# pytest>=7.0
