@@ -185,3 +185,12 @@ Signal Contract v1 does not define:
 - renderer certification
 - hosted validation services
 - product-specific backend architecture
+
+## Extensions
+
+Additive extensions to v1 that do not modify `schema.json`:
+
+- [render-provenance](./render-provenance.md) — HTML attribute and response
+  header family that lets external probes verify how old the SOURCE DATA was
+  at render time, independently of how old the cached render is. Promoted
+  per a two-consumer gate; reference implementation in SerpRadio.
