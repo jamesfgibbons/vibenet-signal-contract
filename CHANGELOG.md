@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows semantic versioning.
 
+## [Unreleased]
+
+### Added
+
+- Added the non-breaking `vibenet.agent-lifecycle/0.1` profile
+- Added a closed metadata allowlist, machine-readable event semantics, and deterministic valid/invalid fixtures
+- Added profile conformance tests without changing Signal Contract v1 schema fields
+
 ## [1.0.1] - 2026-04-21
 
 ### Added

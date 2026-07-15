@@ -49,6 +49,14 @@ The flags are independent. Consumers that ignore them should treat events as
 both publishable and indexable by default. The convention does not add required
 fields or change `schema_version`.
 
+## Profiles
+
+Profiles add domain semantics without changing the flat v1 object:
+
+- [`vibenet.agent-lifecycle/0.1`](profiles/agent-lifecycle/0.1/) maps observed
+  agent state to renderer-facing lifecycle events with a closed, redacted
+  metadata allowlist.
+
 ## Browser primitive
 
 The live browser primitive is served from [vibenet.ai/pulse.js](https://vibenet.ai/pulse.js):

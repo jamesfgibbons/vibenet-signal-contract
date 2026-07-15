@@ -194,3 +194,11 @@ Additive extensions to v1 that do not modify `schema.json`:
   header family that lets external probes verify how old the SOURCE DATA was
   at render time, independently of how old the cached render is. Promoted
   per a two-consumer gate; reference implementation in SerpRadio.
+
+## Profiles
+
+Profiles constrain optional metadata and event semantics without changing this
+schema:
+
+- [Agent Lifecycle Profile 0.1](../../profiles/agent-lifecycle/0.1/) — observed
+  agent lifecycle, attention, completion, error, and recovery semantics.

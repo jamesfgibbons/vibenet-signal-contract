@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibenet.ai/protocol/profiles/agent-lifecycle/0.1/schema.json",
+  "title": "VIBEnet Agent Lifecycle Profile 0.1",
+  "description": "An additive profile layered on Signal Contract v1.",
+  "allOf": [
+    {
+      "$ref": "https://vibenet.ai/protocol/v1/schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "event": {
+          "enum": [
+            "agent.unobserved",
+            "agent.idle",
+            "agent.running",
+            "agent.approval_requested",
+            "agent.input_requested",
+            "agent.completed",
+            "agent.interrupted",
+            "agent.failed",
+            "agent.system_error",
+            "agent.recovered"
+          ]
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "lifecycle_state",
+            "attention_reason",
+            "requires_action",
+            "terminal",
+            "source_protocol",
+            "source_method",
+            "source_version",
+            "source_sequence",
+            "timestamp_semantics",
+            "content_redacted",
+            "thread_ref",
+            "turn_ref"
+          ],
+          "properties": {
+            "profile": {
+              "const": "vibenet.agent-lifecycle/0.1"
+            },
+            "lifecycle_state": {
+              "enum": [
+                "unobserved",
+                "idle",
+                "running",
+                "needs_input",
+                "complete",
+                "error"
+              ]
+            },
+            "attention_reason": {
+              "type": ["string", "null"]
+            },
+            "requires_action": {
+              "type": "boolean"
+            },
+            "terminal": {
+              "type": "boolean"
+            },
+            "source_protocol": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_method": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_sequence": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "timestamp_semantics": {
+              "enum": ["source_event_time", "adapter_observed_time"]
+            },
+            "content_redacted": {
+              "const": true
+            },
+            "thread_ref": {
+              "type": "string",
+              "pattern": "^(hmac-sha256:[a-f0-9]{64}|fixture:[a-z0-9._-]+)$"
+            },
+            "turn_ref": {
+              "type": ["string", "null"],
+              "pattern": "^(hmac-sha256:[a-f0-9]{64}|fixture:[a-z0-9._-]+)$"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

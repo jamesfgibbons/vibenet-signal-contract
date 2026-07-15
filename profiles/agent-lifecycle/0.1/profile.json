@@ -1,0 +1,94 @@
+{
+  "profile": "vibenet.agent-lifecycle/0.1",
+  "signal_contract_version": "1.0",
+  "lifecycle_states": [
+    "unobserved",
+    "idle",
+    "running",
+    "needs_input",
+    "complete",
+    "error"
+  ],
+  "precedence": [
+    "error",
+    "needs_input",
+    "running",
+    "complete",
+    "idle"
+  ],
+  "source_loss_state": "unobserved",
+  "completion_hold_ms": 3000,
+  "unknown_method_policy": "ignore",
+  "events": {
+    "agent.unobserved": {
+      "lifecycle_states": ["unobserved"],
+      "channels": ["advisory"],
+      "requires_action": false,
+      "terminal_values": [false],
+      "attention_reasons": ["source_unavailable", "source_expired"]
+    },
+    "agent.idle": {
+      "lifecycle_states": ["idle"],
+      "channels": ["nominal"],
+      "requires_action": false,
+      "terminal_values": [false],
+      "attention_reasons": [null]
+    },
+    "agent.running": {
+      "lifecycle_states": ["running"],
+      "channels": ["nominal"],
+      "requires_action": false,
+      "terminal_values": [false],
+      "attention_reasons": [null]
+    },
+    "agent.approval_requested": {
+      "lifecycle_states": ["needs_input"],
+      "channels": ["handoff"],
+      "requires_action": true,
+      "terminal_values": [false],
+      "attention_reasons": ["approval_required"]
+    },
+    "agent.input_requested": {
+      "lifecycle_states": ["needs_input"],
+      "channels": ["handoff"],
+      "requires_action": true,
+      "terminal_values": [false],
+      "attention_reasons": ["user_input_required"]
+    },
+    "agent.completed": {
+      "lifecycle_states": ["complete"],
+      "channels": ["nominal"],
+      "requires_action": false,
+      "terminal_values": [true],
+      "attention_reasons": [null]
+    },
+    "agent.interrupted": {
+      "lifecycle_states": ["error"],
+      "channels": ["warning"],
+      "requires_action": false,
+      "terminal_values": [true],
+      "attention_reasons": ["interrupted"]
+    },
+    "agent.failed": {
+      "lifecycle_states": ["error"],
+      "channels": ["critical"],
+      "requires_action": false,
+      "terminal_values": [true],
+      "attention_reasons": ["turn_failed"]
+    },
+    "agent.system_error": {
+      "lifecycle_states": ["error"],
+      "channels": ["critical"],
+      "requires_action": false,
+      "terminal_values": [false, true],
+      "attention_reasons": ["system_error"]
+    },
+    "agent.recovered": {
+      "lifecycle_states": ["idle", "running"],
+      "channels": ["recovery"],
+      "requires_action": false,
+      "terminal_values": [false],
+      "attention_reasons": [null]
+    }
+  }
+}
