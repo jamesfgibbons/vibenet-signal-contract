@@ -92,6 +92,10 @@ mapping is independent and does not imply an official OpenAI integration.
 Unknown source methods MUST be ignored safely. They MUST NOT be guessed into a
 lifecycle state.
 
+For an error notification, `willRetry: true` maps to `terminal: false` and
+`willRetry: false` maps to `terminal: true`. Both remain in lifecycle state
+`error`; retrying does not become a nominal state.
+
 ## Conformance
 
 A profile event conforms when it:

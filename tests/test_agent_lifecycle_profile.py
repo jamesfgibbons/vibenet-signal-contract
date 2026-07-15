@@ -40,7 +40,7 @@ def semantic_errors(payload, profile):
         errors.append("channel")
     if metadata.get("requires_action") is not event_rule["requires_action"]:
         errors.append("requires_action")
-    if metadata.get("terminal") is not event_rule["terminal"]:
+    if metadata.get("terminal") not in event_rule["terminal_values"]:
         errors.append("terminal")
     if metadata.get("attention_reason") not in event_rule["attention_reasons"]:
         errors.append("attention_reason")
@@ -115,10 +115,16 @@ class AgentLifecycleProfileTests(unittest.TestCase):
         interrupted = self.profile["events"]["agent.interrupted"]
         self.assertEqual(completed["lifecycle_states"], ["complete"])
         self.assertEqual(completed["channels"], ["nominal"])
-        self.assertTrue(completed["terminal"])
+        self.assertEqual(completed["terminal_values"], [True])
         self.assertEqual(interrupted["lifecycle_states"], ["error"])
         self.assertEqual(interrupted["channels"], ["warning"])
+        self.assertEqual(interrupted["terminal_values"], [True])
         self.assertNotEqual(completed, interrupted)
+
+    def test_retrying_system_error_may_be_non_terminal(self):
+        system_error = self.profile["events"]["agent.system_error"]
+        self.assertEqual(system_error["lifecycle_states"], ["error"])
+        self.assertEqual(system_error["terminal_values"], [False, True])
 
     def test_recovery_is_a_transition_not_a_seventh_state(self):
         self.assertNotIn("recovery", self.profile["lifecycle_states"])
