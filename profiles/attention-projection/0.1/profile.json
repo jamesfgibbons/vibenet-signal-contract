@@ -1,0 +1,41 @@
+{
+  "profile": "vibenet.attention-projection/0.1",
+  "signal_contract_version": "1.0",
+  "canonical_question": "Given many valid Signal Contract events, which may occupy a human's limited attention without changing what happened?",
+  "adjacent": true,
+  "adds_required_sc_fields": false,
+  "selection_is_not_truth": true,
+  "unobserved_is_not": ["idle", "nominal"],
+  "attention_classes": [
+    "foreground",
+    "ambient",
+    "suppressed",
+    "unobserved"
+  ],
+  "modes": ["governed", "raw"],
+  "channel_priority": [
+    "critical",
+    "handoff",
+    "warning",
+    "opportunity",
+    "recovery",
+    "advisory",
+    "nominal"
+  ],
+  "default_policy": {
+    "policy_version": "attention-policy/0.1.0",
+    "max_foreground_slots": 4,
+    "critical_bypass": true,
+    "maximum_foreground_latency_ms": 250,
+    "min_dwell_ms": 800,
+    "hysteresis_ms": 600,
+    "handoff_reserved_slot": true,
+    "recovery_hold_ms": 2000
+  },
+  "domains": ["search", "content", "ops", "revenue"],
+  "receipt": "vibenet.attention-receipt/0.1",
+  "notes": {
+    "raw_mode": "Teaching contrast. May exceed the slot budget. Must stay labeled raw.",
+    "domain_warning_compression": "Two or more related warnings may become one ambient group without deleting ids."
+  }
+}

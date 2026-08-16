@@ -1,0 +1,94 @@
+[
+  {
+    "name": "invented_transition_class",
+    "expected_rule": "profile_schema",
+    "payload": {
+      "profile_version": "vibenet.modulation-profile/0.1",
+      "previous_signal_id": "sig_same_state_start",
+      "target_signal_id": "sig_same_state_end",
+      "transition_class": "fade",
+      "onset_ms": 200,
+      "slew_ms": 400,
+      "hold_ms": 100,
+      "release_ms": 100,
+      "interruptibility": "soft",
+      "max_transition_ms": 800,
+      "attention_intent": "notice",
+      "valence_curve": { "from": 0.5, "to": 0.5, "kind": "linear", "delay_frac": 0 },
+      "energy_curve": { "from": 0.5, "to": 0.5, "kind": "linear", "delay_frac": 0 },
+      "tension_curve": { "from": 0.5, "to": 0.5, "kind": "linear", "delay_frac": 0 },
+      "intensity_curve": { "from": 0.5, "to": 0.5, "kind": "linear", "delay_frac": 0 },
+      "pulse_curve": { "from": 0.5, "to": 0.5, "kind": "linear", "delay_frac": 0 },
+      "derivation_rule": "fade:illegal",
+      "derivation_receipt": {
+        "receipt_version": "1.0",
+        "profile_version": "vibenet.modulation-profile/0.1",
+        "previous_signal_id": "sig_same_state_start",
+        "target_signal_id": "sig_same_state_end",
+        "previous_channel": "nominal",
+        "target_channel": "warning",
+        "transition_class": "nominal_step",
+        "derivation_rule": "fade:illegal",
+        "onset_ms": 200,
+        "slew_ms": 400,
+        "hold_ms": 100,
+        "release_ms": 100,
+        "max_transition_ms": 800,
+        "attention_intent": "notice",
+        "safety": {
+          "critical_onset_capped": false,
+          "handoff_resolve_blocked": false,
+          "recovery_fullness_gated": false
+        },
+        "derived_at": "2026-08-16T20:00:00Z",
+        "renderer_profile": "synthetic-fixture"
+      }
+    }
+  },
+  {
+    "name": "critical_onset_exceeds_safety",
+    "expected_rule": "channel_safety",
+    "payload": {
+      "profile_version": "vibenet.modulation-profile/0.1",
+      "previous_signal_id": "sig_nominal",
+      "target_signal_id": "sig_critical",
+      "transition_class": "sudden_contradiction",
+      "onset_ms": 800,
+      "slew_ms": 120,
+      "hold_ms": 400,
+      "release_ms": 200,
+      "interruptibility": "hard",
+      "max_transition_ms": 1520,
+      "attention_intent": "interrupt",
+      "valence_curve": { "from": 0.6, "to": 0.18, "kind": "ease_in", "delay_frac": 0 },
+      "energy_curve": { "from": 0.3, "to": 0.85, "kind": "hold_then_snap", "delay_frac": 0 },
+      "tension_curve": { "from": 0.2, "to": 0.92, "kind": "snap", "delay_frac": 0 },
+      "intensity_curve": { "from": 0.3, "to": 0.95, "kind": "snap", "delay_frac": 0 },
+      "pulse_curve": { "from": 0.2, "to": 0.88, "kind": "hold_then_snap", "delay_frac": 0 },
+      "derivation_rule": "sudden_contradiction:snap_tension_interrupt_phrase",
+      "derivation_receipt": {
+        "receipt_version": "1.0",
+        "profile_version": "vibenet.modulation-profile/0.1",
+        "previous_signal_id": "sig_nominal",
+        "target_signal_id": "sig_critical",
+        "previous_channel": "nominal",
+        "target_channel": "critical",
+        "transition_class": "sudden_contradiction",
+        "derivation_rule": "sudden_contradiction:snap_tension_interrupt_phrase",
+        "onset_ms": 800,
+        "slew_ms": 120,
+        "hold_ms": 400,
+        "release_ms": 200,
+        "max_transition_ms": 1520,
+        "attention_intent": "interrupt",
+        "safety": {
+          "critical_onset_capped": false,
+          "handoff_resolve_blocked": false,
+          "recovery_fullness_gated": false
+        },
+        "derived_at": "2026-08-16T20:00:00Z",
+        "renderer_profile": "synthetic-fixture"
+      }
+    }
+  }
+]

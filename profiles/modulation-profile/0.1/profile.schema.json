@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibenet.ai/protocol/profiles/modulation-profile/0.1/schema.json",
+  "title": "VIBEnet Modulation Profile 0.1",
+  "description": "Adjacent profile: governed arrival path between two immutable Signal Contract v1 waypoints. This schema does not extend the flat event.",
+  "$defs": {
+    "field_curve": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "kind", "delay_frac"],
+      "properties": {
+        "from": { "type": "number", "minimum": 0, "maximum": 1 },
+        "to": { "type": "number", "minimum": 0, "maximum": 1 },
+        "kind": {
+          "enum": [
+            "linear",
+            "ease_in",
+            "ease_out",
+            "ease_in_out",
+            "hold_then_snap",
+            "snap"
+          ]
+        },
+        "delay_frac": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_version",
+    "previous_signal_id",
+    "target_signal_id",
+    "transition_class",
+    "onset_ms",
+    "slew_ms",
+    "hold_ms",
+    "release_ms",
+    "interruptibility",
+    "max_transition_ms",
+    "attention_intent",
+    "valence_curve",
+    "energy_curve",
+    "tension_curve",
+    "intensity_curve",
+    "pulse_curve",
+    "derivation_rule",
+    "derivation_receipt"
+  ],
+  "properties": {
+    "profile_version": { "const": "vibenet.modulation-profile/0.1" },
+    "previous_signal_id": { "type": "string", "minLength": 1 },
+    "target_signal_id": { "type": "string", "minLength": 1 },
+    "transition_class": {
+      "enum": [
+        "nominal_step",
+        "gradual_degrade",
+        "sudden_contradiction",
+        "escalation",
+        "handoff",
+        "recovery",
+        "completion",
+        "opportunity_lift"
+      ]
+    },
+    "onset_ms": { "type": "integer", "minimum": 0 },
+    "slew_ms": { "type": "integer", "minimum": 0 },
+    "hold_ms": { "type": "integer", "minimum": 0 },
+    "release_ms": { "type": "integer", "minimum": 0 },
+    "interruptibility": { "enum": ["soft", "hard", "locked"] },
+    "max_transition_ms": { "type": "integer", "minimum": 0, "maximum": 8000 },
+    "attention_intent": {
+      "enum": ["ambient", "notice", "interrupt", "resolve"]
+    },
+    "valence_curve": { "$ref": "#/$defs/field_curve" },
+    "energy_curve": { "$ref": "#/$defs/field_curve" },
+    "tension_curve": { "$ref": "#/$defs/field_curve" },
+    "intensity_curve": { "$ref": "#/$defs/field_curve" },
+    "pulse_curve": { "$ref": "#/$defs/field_curve" },
+    "derivation_rule": { "type": "string", "minLength": 1 },
+    "derivation_receipt": {
+      "$ref": "https://vibenet.ai/protocol/profiles/modulation-profile/0.1/receipt.schema.json"
+    }
+  }
+}

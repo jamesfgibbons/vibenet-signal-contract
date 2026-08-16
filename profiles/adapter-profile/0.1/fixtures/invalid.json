@@ -1,0 +1,87 @@
+[
+  {
+    "name": "unknown_rule_status",
+    "expected_rule": "profile_schema",
+    "payload": {
+      "schema_version": "vibenet.adapter-profile/0.1",
+      "profile_id": "fixture.bad-status",
+      "version": "0.1.0",
+      "label": "Invalid status",
+      "source_schema_fingerprint": "sha256:063988449dac46acb15aebb7b0e525b9188d0b7bb370670f7a0dee95302c8022",
+      "rules": [
+        {
+          "id": "rule-shadow",
+          "label": "Shadow emit",
+          "status": "shadow",
+          "when": { "op": "truthy", "field": "ok" },
+          "emit": { "channel": "nominal", "event": "agent.ok" }
+        }
+      ],
+      "ignored_classes": [],
+      "protected_fields": [],
+      "proposal_source": "human"
+    }
+  },
+  {
+    "name": "unfingerprinted_source",
+    "expected_rule": "profile_schema",
+    "payload": {
+      "schema_version": "vibenet.adapter-profile/0.1",
+      "profile_id": "fixture.bad-fingerprint",
+      "version": "0.1.0",
+      "label": "Missing digest",
+      "source_schema_fingerprint": "synthetic-source-v1",
+      "rules": [],
+      "ignored_classes": [],
+      "protected_fields": ["private_token"],
+      "proposal_source": "human"
+    }
+  },
+  {
+    "name": "unknown_channel",
+    "expected_rule": "profile_schema",
+    "payload": {
+      "schema_version": "vibenet.adapter-profile/0.1",
+      "profile_id": "fixture.bad-channel",
+      "version": "0.1.0",
+      "label": "Invented channel",
+      "source_schema_fingerprint": "sha256:063988449dac46acb15aebb7b0e525b9188d0b7bb370670f7a0dee95302c8022",
+      "rules": [
+        {
+          "id": "rule-invent",
+          "label": "Invented channel",
+          "status": "accepted",
+          "when": { "op": "eq", "field": "status", "value": "ok" },
+          "emit": { "channel": "info", "event": "agent.ok" }
+        }
+      ],
+      "ignored_classes": [],
+      "protected_fields": [],
+      "proposal_source": "human"
+    }
+  },
+  {
+    "name": "proposed_only_must_not_list_accepted_ids",
+    "expected_rule": "profile_schema",
+    "payload": {
+      "schema_version": "vibenet.adapter-profile/0.1",
+      "profile_id": "fixture.proposed-only",
+      "version": "0.1.0",
+      "label": "Proposed mappings must not emit",
+      "source_schema_fingerprint": "sha256:063988449dac46acb15aebb7b0e525b9188d0b7bb370670f7a0dee95302c8022",
+      "rules": [
+        {
+          "id": "rule-handoff-approval",
+          "label": "Human approval → handoff",
+          "status": "proposed",
+          "when": { "op": "truthy", "field": "requires_approval" },
+          "emit": { "channel": "handoff", "event": "agent.approval_required" }
+        }
+      ],
+      "ignored_classes": ["heartbeat"],
+      "protected_fields": ["private_token"],
+      "proposal_source": "browser_assist",
+      "accepted_rule_ids": ["rule-handoff-approval"]
+    }
+  }
+]

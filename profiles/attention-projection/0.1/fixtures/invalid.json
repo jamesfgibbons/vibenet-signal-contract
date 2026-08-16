@@ -1,0 +1,146 @@
+[
+  {
+    "name": "unobserved_labeled_nominal",
+    "expected_rule": "unobserved_policy",
+    "payload": {
+      "schema_version": "vibenet.attention-projection/0.1",
+      "projection_id": "proj-bad-unobserved",
+      "policy_version": "attention-policy/0.1.0",
+      "mode": "governed",
+      "window_started_at": "2026-08-16T20:00:00Z",
+      "window_ended_at": "2026-08-16T20:00:12Z",
+      "source_signal_count": 1,
+      "source_signal_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "observed_entity_count": 1,
+      "expected_entity_count": 2,
+      "unobserved_entity_count": 0,
+      "unobserved_entities": [],
+      "domain_groups": [
+        { "domain": "search", "entity_count": 1, "latest_channel": "nominal" }
+      ],
+      "foreground_slots": [],
+      "ambient_groups": [],
+      "suppressed_count": 0,
+      "suppressions": [],
+      "critical_bypass_applied": false,
+      "maximum_foreground_latency_ms": 250,
+      "projection_ttl_ms": 60000,
+      "created_at": "2026-08-16T20:00:14Z",
+      "source_signal_ids": ["sig_search_00_nom"]
+    }
+  },
+  {
+    "name": "governed_exceeds_slot_budget",
+    "expected_rule": "slot_budget",
+    "payload": {
+      "schema_version": "vibenet.attention-projection/0.1",
+      "projection_id": "proj-bad-budget",
+      "policy_version": "attention-policy/0.1.0",
+      "mode": "governed",
+      "window_started_at": "2026-08-16T20:00:00Z",
+      "window_ended_at": "2026-08-16T20:00:12Z",
+      "source_signal_count": 5,
+      "source_signal_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "observed_entity_count": 5,
+      "expected_entity_count": 5,
+      "unobserved_entity_count": 0,
+      "unobserved_entities": [],
+      "domain_groups": [
+        { "domain": "ops", "entity_count": 5, "latest_channel": "warning" }
+      ],
+      "foreground_slots": [
+        {
+          "slot_index": 0,
+          "attention_class": "foreground",
+          "entity": "agent.ops.00",
+          "domain": "ops",
+          "channel": "warning",
+          "signal_ids": ["sig_0"],
+          "selection_rule": "priority_rank",
+          "selection_reason": "overflow",
+          "critical_bypass": false
+        },
+        {
+          "slot_index": 1,
+          "attention_class": "foreground",
+          "entity": "agent.ops.01",
+          "domain": "ops",
+          "channel": "warning",
+          "signal_ids": ["sig_1"],
+          "selection_rule": "priority_rank",
+          "selection_reason": "overflow",
+          "critical_bypass": false
+        },
+        {
+          "slot_index": 2,
+          "attention_class": "foreground",
+          "entity": "agent.ops.02",
+          "domain": "ops",
+          "channel": "warning",
+          "signal_ids": ["sig_2"],
+          "selection_rule": "priority_rank",
+          "selection_reason": "overflow",
+          "critical_bypass": false
+        },
+        {
+          "slot_index": 3,
+          "attention_class": "foreground",
+          "entity": "agent.ops.03",
+          "domain": "ops",
+          "channel": "warning",
+          "signal_ids": ["sig_3"],
+          "selection_rule": "priority_rank",
+          "selection_reason": "overflow",
+          "critical_bypass": false
+        },
+        {
+          "slot_index": 4,
+          "attention_class": "foreground",
+          "entity": "agent.ops.04",
+          "domain": "ops",
+          "channel": "warning",
+          "signal_ids": ["sig_4"],
+          "selection_rule": "priority_rank",
+          "selection_reason": "overflow",
+          "critical_bypass": false
+        }
+      ],
+      "ambient_groups": [],
+      "suppressed_count": 0,
+      "suppressions": [],
+      "critical_bypass_applied": false,
+      "maximum_foreground_latency_ms": 250,
+      "projection_ttl_ms": 60000,
+      "created_at": "2026-08-16T20:00:14Z",
+      "source_signal_ids": ["sig_0", "sig_1", "sig_2", "sig_3", "sig_4"]
+    }
+  },
+  {
+    "name": "unknown_mode",
+    "expected_rule": "profile_schema",
+    "payload": {
+      "schema_version": "vibenet.attention-projection/0.1",
+      "projection_id": "proj-bad-mode",
+      "policy_version": "attention-policy/0.1.0",
+      "mode": "smart",
+      "window_started_at": "2026-08-16T20:00:00Z",
+      "window_ended_at": "2026-08-16T20:00:12Z",
+      "source_signal_count": 0,
+      "source_signal_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "observed_entity_count": 0,
+      "expected_entity_count": 0,
+      "unobserved_entity_count": 0,
+      "unobserved_entities": [],
+      "domain_groups": [],
+      "foreground_slots": [],
+      "ambient_groups": [],
+      "suppressed_count": 0,
+      "suppressions": [],
+      "critical_bypass_applied": false,
+      "maximum_foreground_latency_ms": 250,
+      "projection_ttl_ms": 60000,
+      "created_at": "2026-08-16T20:00:14Z",
+      "source_signal_ids": []
+    }
+  }
+]

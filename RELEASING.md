@@ -4,11 +4,15 @@ Use this checklist for every public protocol release.
 
 ## Before tagging
 
-1. Run schema tests:
+1. Run schema and profile tests:
 
    ```bash
-   .venv/bin/python -m unittest tests.test_schema -v
+   python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles -v
    ```
+
+   Profile releases do **not** change `spec/v1/schema.json` or bump Signal
+   Contract `schema_version`. Tag them as package versions (for example
+   `v1.1.0`) while the flat event remains `1.0`.
 
 2. Confirm the two published schema copies stay identical:
 

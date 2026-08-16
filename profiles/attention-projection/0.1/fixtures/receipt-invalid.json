@@ -1,0 +1,22 @@
+[
+  {
+    "name": "missing_unobserved_list",
+    "payload": {
+      "schema_version": "vibenet.attention-receipt/0.1",
+      "receipt_id": "ar-bad",
+      "mode": "browser_local",
+      "projection_id": "proj-gov-synthetic8",
+      "policy_version": "attention-policy/0.1.0",
+      "foreground_signal_ids": ["sig_search_00_crit"],
+      "ambient_group_ids": [],
+      "suppressed_event_digest": "not-a-digest",
+      "suppressed_count": 0,
+      "unobserved_entities": [],
+      "selection_summary": "broken",
+      "critical_bypass": false,
+      "audio_muted": false,
+      "reduced_motion": false,
+      "generated_at": "2026-08-16T20:00:14Z"
+    }
+  }
+]

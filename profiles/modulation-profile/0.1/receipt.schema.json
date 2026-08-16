@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibenet.ai/protocol/profiles/modulation-profile/0.1/receipt.schema.json",
+  "title": "VIBEnet Modulation Receipt 0.1",
+  "description": "Derivation record for one contour between two immutable Signal Contract waypoints.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_version",
+    "profile_version",
+    "previous_signal_id",
+    "target_signal_id",
+    "previous_channel",
+    "target_channel",
+    "transition_class",
+    "derivation_rule",
+    "onset_ms",
+    "slew_ms",
+    "hold_ms",
+    "release_ms",
+    "max_transition_ms",
+    "attention_intent",
+    "safety",
+    "derived_at",
+    "renderer_profile"
+  ],
+  "properties": {
+    "receipt_version": { "const": "1.0" },
+    "profile_version": { "const": "vibenet.modulation-profile/0.1" },
+    "previous_signal_id": { "type": "string", "minLength": 1 },
+    "target_signal_id": { "type": "string", "minLength": 1 },
+    "previous_channel": {
+      "enum": [
+        "nominal",
+        "advisory",
+        "warning",
+        "critical",
+        "recovery",
+        "opportunity",
+        "handoff"
+      ]
+    },
+    "target_channel": {
+      "enum": [
+        "nominal",
+        "advisory",
+        "warning",
+        "critical",
+        "recovery",
+        "opportunity",
+        "handoff"
+      ]
+    },
+    "transition_class": {
+      "enum": [
+        "nominal_step",
+        "gradual_degrade",
+        "sudden_contradiction",
+        "escalation",
+        "handoff",
+        "recovery",
+        "completion",
+        "opportunity_lift"
+      ]
+    },
+    "derivation_rule": { "type": "string", "minLength": 1 },
+    "onset_ms": { "type": "integer", "minimum": 0 },
+    "slew_ms": { "type": "integer", "minimum": 0 },
+    "hold_ms": { "type": "integer", "minimum": 0 },
+    "release_ms": { "type": "integer", "minimum": 0 },
+    "max_transition_ms": { "type": "integer", "minimum": 0, "maximum": 8000 },
+    "attention_intent": {
+      "enum": ["ambient", "notice", "interrupt", "resolve"]
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "critical_onset_capped",
+        "handoff_resolve_blocked",
+        "recovery_fullness_gated"
+      ],
+      "properties": {
+        "critical_onset_capped": { "type": "boolean" },
+        "handoff_resolve_blocked": { "type": "boolean" },
+        "recovery_fullness_gated": { "type": "boolean" }
+      }
+    },
+    "derived_at": { "type": "string", "format": "date-time" },
+    "renderer_profile": { "type": "string", "minLength": 1 }
+  }
+}
