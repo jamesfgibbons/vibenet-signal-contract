@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibenet.ai/protocol/profiles/attention-projection/0.1/schema.json",
+  "title": "VIBEnet Attention Projection 0.1",
+  "description": "Adjacent profile: a perceptual mix of immutable Signal Contract v1 events. This schema does not extend the flat event.",
+  "$defs": {
+    "channel": {
+      "enum": [
+        "nominal",
+        "advisory",
+        "warning",
+        "critical",
+        "recovery",
+        "opportunity",
+        "handoff"
+      ]
+    },
+    "foreground_slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_index",
+        "attention_class",
+        "entity",
+        "domain",
+        "channel",
+        "signal_ids",
+        "selection_rule",
+        "selection_reason",
+        "critical_bypass"
+      ],
+      "properties": {
+        "slot_index": { "type": "integer", "minimum": 0 },
+        "attention_class": { "const": "foreground" },
+        "entity": { "type": "string", "minLength": 1 },
+        "domain": { "type": "string", "minLength": 1 },
+        "channel": { "$ref": "#/$defs/channel" },
+        "signal_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "selection_rule": { "type": "string", "minLength": 1 },
+        "selection_reason": { "type": "string", "minLength": 1 },
+        "critical_bypass": { "type": "boolean" }
+      }
+    },
+    "ambient_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "group_id",
+        "domain",
+        "attention_class",
+        "channel",
+        "entity_count",
+        "signal_ids",
+        "selection_reason"
+      ],
+      "properties": {
+        "group_id": { "type": "string", "minLength": 1 },
+        "domain": { "type": "string", "minLength": 1 },
+        "attention_class": { "const": "ambient" },
+        "channel": { "$ref": "#/$defs/channel" },
+        "entity_count": { "type": "integer", "minimum": 1 },
+        "signal_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "selection_reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "suppression_note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entity", "domain", "channel", "signal_id", "reason"],
+      "properties": {
+        "entity": { "type": "string", "minLength": 1 },
+        "domain": { "type": "string", "minLength": 1 },
+        "channel": { "$ref": "#/$defs/channel" },
+        "signal_id": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "domain_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "entity_count", "latest_channel"],
+      "properties": {
+        "domain": { "type": "string", "minLength": 1 },
+        "entity_count": { "type": "integer", "minimum": 0 },
+        "latest_channel": { "$ref": "#/$defs/channel" }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "projection_id",
+    "policy_version",
+    "mode",
+    "window_started_at",
+    "window_ended_at",
+    "source_signal_count",
+    "source_signal_digest",
+    "observed_entity_count",
+    "expected_entity_count",
+    "unobserved_entity_count",
+    "unobserved_entities",
+    "domain_groups",
+    "foreground_slots",
+    "ambient_groups",
+    "suppressed_count",
+    "suppressions",
+    "critical_bypass_applied",
+    "maximum_foreground_latency_ms",
+    "projection_ttl_ms",
+    "created_at",
+    "source_signal_ids"
+  ],
+  "properties": {
+    "schema_version": { "const": "vibenet.attention-projection/0.1" },
+    "projection_id": { "type": "string", "minLength": 1 },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "mode": { "enum": ["governed", "raw"] },
+    "window_started_at": { "type": "string", "format": "date-time" },
+    "window_ended_at": { "type": "string", "format": "date-time" },
+    "source_signal_count": { "type": "integer", "minimum": 0 },
+    "source_signal_digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "observed_entity_count": { "type": "integer", "minimum": 0 },
+    "expected_entity_count": { "type": "integer", "minimum": 0 },
+    "unobserved_entity_count": { "type": "integer", "minimum": 0 },
+    "unobserved_entities": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "domain_groups": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/domain_group" }
+    },
+    "foreground_slots": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/foreground_slot" }
+    },
+    "ambient_groups": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ambient_group" }
+    },
+    "suppressed_count": { "type": "integer", "minimum": 0 },
+    "suppressions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/suppression_note" }
+    },
+    "critical_bypass_applied": { "type": "boolean" },
+    "maximum_foreground_latency_ms": { "type": "integer", "minimum": 0 },
+    "projection_ttl_ms": { "type": "integer", "minimum": 1 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "source_signal_ids": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "foundry.listening-receipt/0.1",
+  "receipt_id": "fr-fixture.foreign-run-0.1.0-synthetic",
+  "mode": "browser_local",
+  "profile_id": "fixture.foreign-run",
+  "profile_version": "0.1.0",
+  "source_schema_fingerprint": "sha256:063988449dac46acb15aebb7b0e525b9188d0b7bb370670f7a0dee95302c8022",
+  "source_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "source_event_count": 8,
+  "accepted_rule_ids": [
+    "rule-handoff-approval",
+    "rule-failed-critical",
+    "rule-retry-warning"
+  ],
+  "proposed_only_rule_ids": [],
+  "protected_fields": ["private_token", "prompt", "raw_payload"],
+  "protected_exclusions": 1,
+  "mapped_count": 3,
+  "rejected_count": 5,
+  "signal_contract_ids": [
+    "sc-src-retry-rule-retry-warning",
+    "sc-src-failed-rule-failed-critical",
+    "sc-src-approval-rule-handoff-approval"
+  ],
+  "reject_reasons": {
+    "ignored_class": 3,
+    "unmapped": 2
+  },
+  "browser_assist_enabled": false,
+  "generated_at": "2026-08-16T20:00:00Z"
+}

@@ -1,0 +1,80 @@
+{
+  "profile": "vibenet.modulation-profile/0.1",
+  "signal_contract_version": "1.0",
+  "canonical_question": "How may renderer-facing state travel between two immutable Signal Contract waypoints?",
+  "adjacent": true,
+  "adds_required_sc_fields": false,
+  "waypoints_immutable": true,
+  "samples_are_not_events": true,
+  "transition_classes": [
+    "nominal_step",
+    "gradual_degrade",
+    "sudden_contradiction",
+    "escalation",
+    "handoff",
+    "recovery",
+    "completion",
+    "opportunity_lift"
+  ],
+  "curve_kinds": [
+    "linear",
+    "ease_in",
+    "ease_out",
+    "ease_in_out",
+    "hold_then_snap",
+    "snap"
+  ],
+  "interruptibility": ["soft", "hard", "locked"],
+  "attention_intents": ["ambient", "notice", "interrupt", "resolve"],
+  "modulated_fields": [
+    "valence",
+    "energy",
+    "tension",
+    "intensity",
+    "pulse"
+  ],
+  "channel_safety": {
+    "nominal": {
+      "max_onset_ms": 2000,
+      "min_stabilization_ms": 0,
+      "resolve_requires_terminal": false
+    },
+    "advisory": {
+      "max_onset_ms": 1200,
+      "min_stabilization_ms": 0,
+      "resolve_requires_terminal": false
+    },
+    "opportunity": {
+      "max_onset_ms": 1000,
+      "min_stabilization_ms": 0,
+      "resolve_requires_terminal": false
+    },
+    "warning": {
+      "max_onset_ms": 600,
+      "min_stabilization_ms": 200,
+      "resolve_requires_terminal": false
+    },
+    "critical": {
+      "max_onset_ms": 180,
+      "min_stabilization_ms": 400,
+      "resolve_requires_terminal": false
+    },
+    "handoff": {
+      "max_onset_ms": 500,
+      "min_stabilization_ms": 800,
+      "resolve_requires_terminal": true
+    },
+    "recovery": {
+      "max_onset_ms": 900,
+      "min_stabilization_ms": 1200,
+      "resolve_requires_terminal": false
+    }
+  },
+  "safety_flags": [
+    "critical_onset_capped",
+    "handoff_resolve_blocked",
+    "recovery_fullness_gated"
+  ],
+  "max_transition_ms_cap": 8000,
+  "receipt": "vibenet.modulation-receipt/0.1"
+}

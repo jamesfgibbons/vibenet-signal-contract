@@ -6,11 +6,22 @@ The format is based on Keep a Changelog and this project follows semantic versio
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-08-16
+
 ### Added
 
 - Added the non-breaking `vibenet.agent-lifecycle/0.1` profile
 - Added a closed metadata allowlist, machine-readable event semantics, and deterministic valid/invalid fixtures
 - Added profile conformance tests without changing Signal Contract v1 schema fields
+- Added adjacent `vibenet.adapter-profile/0.1` (observed ≠ understood ≠ authorized to render)
+- Added adjacent `vibenet.modulation-profile/0.1` (same state, different arrival; waypoints immutable)
+- Added adjacent `vibenet.attention-projection/0.1` (selection is not truth; unobserved ≠ nominal)
+- Added listening, modulation, and attention receipts as companion schemas
+- Added synthetic fixtures and tests for the three adjacent profiles
+
+### Notes
+
+- Signal Contract `schema_version` remains `"1.0"`. These profiles do not add required fields to the flat event.
 
 ## [1.0.1] - 2026-04-21
 

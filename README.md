@@ -49,13 +49,20 @@ The flags are independent. Consumers that ignore them should treat events as
 both publishable and indexable by default. The convention does not add required
 fields or change `schema_version`.
 
-## Profiles
+## Adjacent profiles
 
-Profiles add domain semantics without changing the flat v1 object:
+Profiles add domain semantics **without changing** the flat v1 object. They do
+not add required fields and they are not Signal Contract v2.
 
-- [`vibenet.agent-lifecycle/0.1`](profiles/agent-lifecycle/0.1/) maps observed
-  agent state to renderer-facing lifecycle events with a closed, redacted
-  metadata allowlist.
+| Profile | Canonical question |
+| --- | --- |
+| [`vibenet.agent-lifecycle/0.1`](profiles/agent-lifecycle/0.1/) | What should a renderer know about an agent without receiving prompts, output, or private identifiers? |
+| [`vibenet.adapter-profile/0.1`](profiles/adapter-profile/0.1/) | When may a foreign source event become a Signal Contract event? |
+| [`vibenet.modulation-profile/0.1`](profiles/modulation-profile/0.1/) | How may renderer-facing state travel between two immutable waypoints? |
+| [`vibenet.attention-projection/0.1`](profiles/attention-projection/0.1/) | Which valid events may occupy limited human attention without changing what happened? |
+
+Observed is not understood. Understood is not authorized to render. Selection
+is not truth. Arrival is not the same fact as destination.
 
 ## Browser primitive
 
@@ -95,8 +102,8 @@ The live browser primitive is served from [vibenet.ai/pulse.js](https://vibenet.
 ### Validate the schema
 
 ```bash
-python3 -m pip install jsonschema
-python3 -m unittest tests.test_schema -v
+python3 -m pip install jsonschema referencing
+python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles -v
 ```
 
 ### Run the browser example

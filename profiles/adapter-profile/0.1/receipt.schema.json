@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibenet.ai/protocol/profiles/adapter-profile/0.1/receipt.schema.json",
+  "title": "VIBEnet Foundry Listening Receipt 0.1",
+  "description": "Audit record of one adapter mapping pass. Adjacent to Signal Contract v1; does not rewrite source events or emitted events.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "mode",
+    "profile_id",
+    "profile_version",
+    "source_schema_fingerprint",
+    "source_hash",
+    "source_event_count",
+    "accepted_rule_ids",
+    "proposed_only_rule_ids",
+    "protected_fields",
+    "protected_exclusions",
+    "mapped_count",
+    "rejected_count",
+    "signal_contract_ids",
+    "reject_reasons",
+    "browser_assist_enabled",
+    "generated_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "foundry.listening-receipt/0.1" },
+    "receipt_id": { "type": "string", "minLength": 1 },
+    "mode": { "const": "browser_local" },
+    "profile_id": { "type": "string", "minLength": 1 },
+    "profile_version": { "type": "string", "minLength": 1 },
+    "source_schema_fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "source_event_count": { "type": "integer", "minimum": 0 },
+    "accepted_rule_ids": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "proposed_only_rule_ids": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "protected_fields": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "protected_exclusions": { "type": "integer", "minimum": 0 },
+    "mapped_count": { "type": "integer", "minimum": 0 },
+    "rejected_count": { "type": "integer", "minimum": 0 },
+    "signal_contract_ids": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "reject_reasons": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 1 },
+      "propertyNames": {
+        "enum": [
+          "malformed",
+          "ignored_class",
+          "no_accepted_rule",
+          "unmapped",
+          "invalid_signal"
+        ]
+      }
+    },
+    "browser_assist_enabled": { "type": "boolean" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}

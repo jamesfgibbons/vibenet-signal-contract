@@ -13,8 +13,8 @@ Thanks for helping improve Signal Contract.
 ## Local validation
 
 ```bash
-python3 -m pip install jsonschema
-python3 -m unittest tests.test_schema -v
+python3 -m pip install jsonschema referencing
+python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles -v
 ```
 
 ## Change types

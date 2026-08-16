@@ -1,0 +1,36 @@
+{
+  "profile": "vibenet.adapter-profile/0.1",
+  "signal_contract_version": "1.0",
+  "canonical_question": "When may a foreign source event become a Signal Contract event?",
+  "adjacent": true,
+  "adds_required_sc_fields": false,
+  "emit_policy": "accepted_rules_only",
+  "match_policy": "first_accepted_when_wins",
+  "unmapped_policy": "silent_reject",
+  "source_loss_is_not": ["nominal", "idle"],
+  "rule_statuses": ["proposed", "accepted", "rejected"],
+  "emit_statuses": ["accepted"],
+  "reject_reasons": [
+    "malformed",
+    "ignored_class",
+    "no_accepted_rule",
+    "unmapped",
+    "invalid_signal"
+  ],
+  "proposal_sources": ["human", "browser_assist", "imported"],
+  "protected_field_policy": "strip_or_invalid_signal",
+  "listening_receipt": "foundry.listening-receipt/0.1",
+  "when_ops": [
+    "eq",
+    "gte",
+    "lt",
+    "truthy",
+    "and",
+    "retry_while_confidence_falling"
+  ],
+  "notes": {
+    "observed_vs_understood": "A source event may be stored and counted without a matching rule.",
+    "understood_vs_authorized": "A matching proposed rule is understanding, not authorization.",
+    "assist_cannot_emit": "browser_assist may draft proposed rules only."
+  }
+}

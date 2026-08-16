@@ -1,0 +1,22 @@
+{
+  "schema_version": "vibenet.attention-receipt/0.1",
+  "receipt_id": "ar-proj-gov-synthetic8",
+  "mode": "browser_local",
+  "projection_id": "proj-gov-synthetic8",
+  "policy_version": "attention-policy/0.1.0",
+  "foreground_signal_ids": [
+    "sig_search_00_crit",
+    "sig_ops_00_handoff",
+    "sig_ops_01_recovery",
+    "sig_rev_00_opp"
+  ],
+  "ambient_group_ids": ["ambient-domain-warning-content"],
+  "suppressed_event_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "suppressed_count": 3,
+  "unobserved_entities": ["agent.revenue.01"],
+  "selection_summary": "Governed mix: 4 foreground slots featuring search, ops, revenue; 3 suppressed; 1 unobserved; critical bypass applied. Selection is not truth.",
+  "critical_bypass": true,
+  "audio_muted": false,
+  "reduced_motion": false,
+  "generated_at": "2026-08-16T20:00:14Z"
+}

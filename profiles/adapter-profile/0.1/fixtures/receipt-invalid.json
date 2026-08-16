@@ -1,0 +1,25 @@
+[
+  {
+    "name": "invented_reject_reason",
+    "payload": {
+      "schema_version": "foundry.listening-receipt/0.1",
+      "receipt_id": "fr-bad",
+      "mode": "browser_local",
+      "profile_id": "fixture.foreign-run",
+      "profile_version": "0.1.0",
+      "source_schema_fingerprint": "sha256:063988449dac46acb15aebb7b0e525b9188d0b7bb370670f7a0dee95302c8022",
+      "source_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_event_count": 1,
+      "accepted_rule_ids": [],
+      "proposed_only_rule_ids": [],
+      "protected_fields": [],
+      "protected_exclusions": 0,
+      "mapped_count": 0,
+      "rejected_count": 1,
+      "signal_contract_ids": [],
+      "reject_reasons": { "timeout": 1 },
+      "browser_assist_enabled": false,
+      "generated_at": "2026-08-16T20:00:00Z"
+    }
+  }
+]
