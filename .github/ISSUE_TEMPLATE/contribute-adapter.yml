@@ -1,0 +1,45 @@
+name: Contribute an adapter
+description: Propose a normalizer from a foreign source into validated Signal Contract v1 events.
+title: "[adapter] "
+labels: ["adapter"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Adapters are normalizers. They do not become the source of truth and they do
+        not control the foreign system. See the Codex adapter for the privacy pattern:
+        redact first, emit a whitelist, fail closed.
+  - type: input
+    id: source
+    attributes:
+      label: Foreign source
+      placeholder: Codex app-server JSONL / other public stream
+    validations:
+      required: true
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Adjacent profile
+      options:
+        - vibenet.agent-lifecycle/0.1
+        - vibenet.adapter-profile/0.1
+        - vibenet.modulation-profile/0.1
+        - vibenet.attention-projection/0.1
+        - v1 core only
+        - new profile (justify why v1 fields are not enough)
+    validations:
+      required: true
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Privacy boundary
+      description: What is ingested, what is emitted, what is never retained. Must fail closed on missing key material.
+    validations:
+      required: true
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Fixture plan
+      description: Documented replay only. Never claim live fleet state.
+    validations:
+      required: true
