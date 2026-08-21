@@ -1,0 +1,50 @@
+name: Add a renderer
+description: Propose a new renderer that consumes Signal Contract v1 without inventing truth.
+title: "[renderer] "
+labels: ["renderer"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Renderers consume the flat v1 object. They do not define transport, auth, or
+        canonical state. Selection is not truth. Observed is not understood.
+  - type: input
+    id: renderer_name
+    attributes:
+      label: Renderer name
+      placeholder: open-ear earcon / WLED / HUD chip
+    validations:
+      required: true
+  - type: dropdown
+    id: medium
+    attributes:
+      label: Medium
+      options:
+        - audio / earcon
+        - light
+        - spatial / HUD
+        - browser
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: channels
+    attributes:
+      label: Channel handling
+      description: How all seven channels are handled without throwing (nominal, advisory, warning, critical, recovery, opportunity, handoff).
+    validations:
+      required: true
+  - type: textarea
+    id: mapping
+    attributes:
+      label: Field mapping
+      description: How valence, energy, tension, intensity, hue, and pulse become renderer output. No private thresholds required.
+    validations:
+      required: true
+  - type: textarea
+    id: location
+    attributes:
+      label: Proposed location
+      description: examples/, renderers/, or an independent adapter repo.
+    validations:
+      required: true

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Live protocol
+    url: https://vibenet.ai/protocol
+    about: Canonical protocol reference and live schema
+  - name: Schema JSON
+    url: https://vibenet.ai/protocol/v1/schema.json
+    about: Served Signal Contract v1 schema

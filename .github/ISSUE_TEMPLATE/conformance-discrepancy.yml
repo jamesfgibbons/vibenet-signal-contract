@@ -1,0 +1,50 @@
+name: Report a conformance discrepancy
+description: An emitted event or renderer disagrees with spec/v1/schema.json or the served copy.
+title: "[conformance] "
+labels: ["conformance"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A producer conforms when every emitted object validates against `spec/v1/schema.json`.
+        A renderer conforms when it handles all seven public semantic channels without throwing.
+
+        Dual-publish lockstep matters. If the public repo and `https://vibenet.ai/protocol/v1/schema.json`
+        disagree, say so here. Do not paste private product events that contain prompts, PII, or account IDs.
+  - type: dropdown
+    id: side
+    attributes:
+      label: Which side
+      options:
+        - producer / event
+        - renderer
+        - dual-publish lockstep (repo vs served schema)
+        - profile (adjacent, not v1 required fields)
+    validations:
+      required: true
+  - type: input
+    id: schema_version
+    attributes:
+      label: schema_version observed
+      placeholder: "1.0"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+      description: Spec rule, required field, enum, or channel behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed
+      description: Sanitized event, validator output, or renderer behavior. Redact private identifiers.
+    validations:
+      required: true
+  - type: textarea
+    id: copies
+    attributes:
+      label: Copies compared
+      description: Optional. Which of spec/v1, site/v1, live vibenet.ai, or a local vendored copy disagreed.
