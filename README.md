@@ -6,6 +6,13 @@ VIBEnet Signal Contract is a flat JSON event object for renderer-facing agent aw
 
 This repo is the public source package for the open protocol served live at [vibenet.ai/protocol](https://vibenet.ai/protocol). It is hosted under the publisher's GitHub account, but the product and protocol brand remain VIBEnet.
 
+## Validate
+
+```bash
+python3 -m pip install jsonschema referencing
+python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles -v
+```
+
 ## Canonical example
 
 ```json
