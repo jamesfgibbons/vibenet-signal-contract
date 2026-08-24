@@ -14,7 +14,7 @@ Thanks for helping improve Signal Contract.
 
 ```bash
 python3 -m pip install jsonschema referencing
-python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles -v
+python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles tests.test_doc_drift -v
 ```
 
 ## Change types
