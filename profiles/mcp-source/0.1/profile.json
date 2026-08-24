@@ -47,6 +47,24 @@
       "emit": "agent.running"
     },
     {
+      "id": "rule-role-established",
+      "status": "accepted",
+      "when": { "mcp_condition": "role_established" },
+      "emit": "agent.running"
+    },
+    {
+      "id": "rule-delegated",
+      "status": "accepted",
+      "when": { "mcp_condition": "delegated" },
+      "emit": "agent.running"
+    },
+    {
+      "id": "rule-tool-risk",
+      "status": "accepted",
+      "when": { "mcp_condition": "tool_risk_claimed" },
+      "emit": "agent.approval_requested"
+    },
+    {
       "id": "rule-input-required",
       "status": "accepted",
       "when": { "mcp_condition": "input_required" },
@@ -100,7 +118,8 @@
     "progress",
     "resource_read",
     "initialize",
-    "ping"
+    "ping",
+    "tool_discovered"
   ],
   "events": {
     "agent.unobserved": {
@@ -150,7 +169,7 @@
       "channels": ["recovery"],
       "requires_action": false,
       "terminal_values": [false, true],
-      "attention_reasons": ["cms_pass", null]
+      "attention_reasons": ["cms_pass", "authority_granted", null]
     },
     "agent.authority_denied": {
       "lifecycle_states": ["error"],

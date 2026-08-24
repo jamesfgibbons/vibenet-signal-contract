@@ -77,6 +77,7 @@ class McpSourceProfileTests(unittest.TestCase):
 
     def test_healthy_tools_call_is_silent(self):
         self.assertIn("tools_call_healthy", self.profile["silent_conditions"])
+        self.assertIn("tool_discovered", self.profile["silent_conditions"])
         emit_events = set(self.profile["events"])
         self.assertNotIn("tools.call", emit_events)
 
@@ -116,20 +117,30 @@ class McpSourceProfileTests(unittest.TestCase):
             metadata_schema["properties"]["mcp_spec_version"]["const"], "2026-07-28"
         )
 
-    def test_authority_trace_handoff_then_recovery(self):
+    def test_authority_passport_handoff_then_grant(self):
         beats = load_jsonl(AUTHORITY_PATH)
         self.assertEqual([b["event"] for b in beats], [
             "agent.running",
-            "agent.input_requested",
+            "agent.running",
+            "agent.approval_requested",
             "agent.recovered",
         ])
-        self.assertEqual(beats[1]["channel"], "handoff")
-        self.assertEqual(beats[1]["metadata"]["cms_verdict"], "UNMEASURED")
-        self.assertEqual(beats[2]["channel"], "recovery")
-        self.assertEqual(beats[2]["metadata"]["cms_verdict"], "PASS")
+        self.assertEqual(beats[0]["metadata"]["mapping_rule_id"], "rule-role-established")
+        self.assertEqual(beats[1]["metadata"]["mapping_rule_id"], "rule-delegated")
+        self.assertEqual(beats[1]["metadata"]["actor_ref"], "fixture:agent-b")
+        self.assertEqual(beats[2]["channel"], "handoff")
+        self.assertEqual(beats[2]["metadata"]["mapping_rule_id"], "rule-tool-risk")
+        self.assertIsNone(beats[2]["metadata"]["cms_verdict"])
+        self.assertEqual(beats[3]["channel"], "recovery")
+        self.assertEqual(beats[3]["metadata"]["attention_reason"], "authority_granted")
+        self.assertNotEqual(beats[3]["metadata"]["cms_verdict"], "PASS")
+        blob = json.dumps(beats)
+        self.assertNotIn("@", blob)
+        self.assertNotIn("oauth", blob)
         for beat in beats:
             self.assertEqual(list(self.core_validator.iter_errors(beat)), [])
             self.assertEqual(list(self.profile_validator.iter_errors(beat)), [])
+            self.assertEqual(semantic_errors(beat, self.profile), [])
 
     def test_recovery_is_not_a_lifecycle_state(self):
         self.assertNotIn("recovery", self.profile["lifecycle_states"])

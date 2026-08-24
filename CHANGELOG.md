@@ -10,7 +10,8 @@ The format is based on Keep a Changelog and this project follows semantic versio
 
 - Added the non-breaking `vibenet.mcp-source/0.1` profile (MCP 2026-07-28 pin)
 - MCP activity is observation; only ratified consequential transitions emit
-- Closed metadata allowlist, opaque task/actor refs, Authority Trace fixture
+- Closed metadata allowlist, opaque task/actor refs, Authority Passport Trace fixture
+- Passport beats: role established, delegated worker, destructive tool risk → handoff, authority grant → recovery
 
 ### Notes
 

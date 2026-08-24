@@ -28,14 +28,16 @@ and event-channel work is tracked, not invented here.
 | MCP condition | Profile event | Channel |
 | --- | --- | --- |
 | task accepted/active | `agent.running` | `nominal` |
-| progress / healthy `tools/call` / resource read | silent | — |
+| role established | `agent.running` | `nominal` |
+| task delegated (opaque actor change) | `agent.running` | `nominal` |
+| progress / tool discovered / healthy `tools/call` / resource read | silent | — |
 | InputRequired / elicitation | `agent.input_requested` | `handoff` |
-| approval boundary | `agent.approval_requested` | `handoff` |
+| approval boundary / destructive tool risk claimed | `agent.approval_requested` | `handoff` |
 | CMS `UNMEASURED` on a proposed publish | `agent.input_requested` | `handoff` |
 | task completed | `agent.completed` | `nominal` |
 | tool/action fails | `agent.failed` | `warning` or `critical` |
 | transport/source disappears | `agent.unobserved` | `advisory` |
-| trusted operation after failure / CMS `PASS` | `agent.recovered` | `recovery` |
+| trusted operation after failure / authority granted / CMS `PASS` | `agent.recovered` | `recovery` |
 | authority denied or revoked | `agent.authority_denied` | `warning` or `critical` |
 
 `agent.recovered` requires a **fresh** mapped observation. Elapsed time MUST NOT
@@ -50,7 +52,12 @@ account identifiers.
 
 Public `entity` is a privacy-safe reference such as `agent.mcp.fixture_task`.
 Real MCP identity, if present in the source, belongs only in a mapping receipt
-as an opaque actor_ref.
+as an opaque actor_ref. Role changes are perceptible as `actor_ref` swaps, never
+as email, OAuth subject, or command text.
+
+The Authority Passport fixture answers when **capability changes hands**. CMS
+`UNMEASURED` remains a valid mapping for a later publishing bridge; it is not
+the passport climax.
 
 ## Conformance
 
