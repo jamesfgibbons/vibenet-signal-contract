@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibenet.ai/protocol/profiles/mcp-source/0.1/schema.json",
+  "title": "VIBEnet MCP Source Profile 0.1",
+  "description": "An additive profile layered on Signal Contract v1. MCP activity is observation; only ratified mappings emit.",
+  "allOf": [
+    {
+      "$ref": "https://vibenet.ai/protocol/v1/schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "event": {
+          "enum": [
+            "agent.unobserved",
+            "agent.running",
+            "agent.approval_requested",
+            "agent.input_requested",
+            "agent.completed",
+            "agent.failed",
+            "agent.recovered",
+            "agent.authority_denied"
+          ]
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "lifecycle_state",
+            "attention_reason",
+            "requires_action",
+            "terminal",
+            "source_protocol",
+            "source_method",
+            "mcp_spec_version",
+            "source_sequence",
+            "timestamp_semantics",
+            "content_redacted",
+            "task_ref",
+            "actor_ref",
+            "mapping_rule_id",
+            "cms_verdict"
+          ],
+          "properties": {
+            "profile": { "const": "vibenet.mcp-source/0.1" },
+            "lifecycle_state": {
+              "enum": ["unobserved", "idle", "running", "needs_input", "complete", "error"]
+            },
+            "attention_reason": { "type": ["string", "null"] },
+            "requires_action": { "type": "boolean" },
+            "terminal": { "type": "boolean" },
+            "source_protocol": { "const": "mcp" },
+            "source_method": { "type": "string", "minLength": 1 },
+            "mcp_spec_version": { "const": "2026-07-28" },
+            "source_sequence": { "type": "integer", "minimum": 0 },
+            "timestamp_semantics": {
+              "enum": ["source_event_time", "adapter_observed_time"]
+            },
+            "content_redacted": { "const": true },
+            "task_ref": {
+              "type": "string",
+              "pattern": "^(hmac-sha256:[a-f0-9]{64}|fixture:[a-z0-9._-]+)$"
+            },
+            "actor_ref": {
+              "type": "string",
+              "pattern": "^(hmac-sha256:[a-f0-9]{64}|fixture:[a-z0-9._-]+)$"
+            },
+            "mapping_rule_id": { "type": "string", "minLength": 1 },
+            "cms_verdict": {
+              "type": ["string", "null"],
+              "enum": ["UNMEASURED", "PASS", "FAIL", "N/A", null]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -10,5 +10,6 @@ v2 object.
 | [adapter-profile/0.1](adapter-profile/0.1/) | Mapping rules + listening receipt | When may a foreign source event become a Signal Contract event? |
 | [modulation-profile/0.1](modulation-profile/0.1/) | Arrival path + derivation receipt | How may renderer-facing state travel between two immutable waypoints? |
 | [attention-projection/0.1](attention-projection/0.1/) | Mix + attention receipt | Which valid events may occupy limited attention without changing truth? |
+| [mcp-source/0.1](mcp-source/0.1/) | MCP observation → SC event | When does an MCP protocol event become a VIBEnet awareness event? |
 
 Fixtures are synthetic. They are not production traces.

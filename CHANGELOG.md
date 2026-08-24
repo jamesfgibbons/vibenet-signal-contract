@@ -6,6 +6,17 @@ The format is based on Keep a Changelog and this project follows semantic versio
 
 ## [Unreleased]
 
+### Added
+
+- Added the non-breaking `vibenet.mcp-source/0.1` profile (MCP 2026-07-28 pin)
+- MCP activity is observation; only ratified consequential transitions emit
+- Closed metadata allowlist, opaque task/actor refs, Authority Passport Trace fixture
+- Passport beats: role established, delegated worker, destructive tool risk → handoff, authority grant → recovery
+
+### Notes
+
+- Signal Contract `schema_version` remains `"1.0"`. This profile does not add required fields to the flat event. Package tag (if any) is a separate Chair act.
+
 ## [1.1.0] - 2026-08-16
 
 ### Added
