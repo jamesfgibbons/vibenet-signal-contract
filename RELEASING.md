@@ -7,7 +7,7 @@ Use this checklist for every public protocol release.
 1. Run schema and profile tests:
 
    ```bash
-   python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles -v
+   python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles tests.test_doc_drift -v
    ```
 
    Profile releases do **not** change `spec/v1/schema.json` or bump Signal

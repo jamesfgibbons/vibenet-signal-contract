@@ -6,6 +6,18 @@ The format is based on Keep a Changelog and this project follows semantic versio
 
 ## [Unreleased]
 
+### Changed
+
+- SPEC Profiles now lists all four released adjacent profiles (agent-lifecycle, adapter, modulation, attention)
+- Restored `spec/v1/metadata-conventions.md` as the in-repo L4 target (registered keys unchanged)
+- Conformance README names L2–L5 as the engineering roadmap; those tiers remain pending
+- Pin `actions/checkout` and `actions/setup-python` to commit SHAs
+
+### Notes
+
+- Signal Contract `schema_version` remains `"1.0"`. No new profile. No required metadata fields.
+- Suggested later Chair tag: `v1.1.1` (docs/CI only). `v1.2.0` is reserved for `mcp-source/0.1` if that profile merges.
+
 ## [1.1.0] - 2026-08-16
 
 ### Added

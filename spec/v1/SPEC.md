@@ -106,60 +106,10 @@ Renderers must not depend on `metadata` for core protocol validity.
 
 ### Publishability and indexability convention
 
-Signal Contract v1 recognizes three optional metadata keys for events that
-represent produced artifacts, fallback states, public receipts, or citation
-surfaces:
-
-| Metadata key | Type | Meaning |
-| --- | --- | --- |
-| `publishable` | `boolean` | Whether the event represents content fit for direct human surfacing |
-| `indexable` | `boolean` | Whether the event represents content fit for machine citation, caching, or reference accumulation |
-| `fallback_reason` | `string` | Optional explanation when an event is not publishable, especially when it remains indexable |
-
-`publishable` and `indexable` are independent. An event may be both
-publishable and indexable, publishable but not indexable, indexable but not
-publishable, or neither. A fallback state can therefore remain valid evidence
-for machines while being withheld from direct human presentation.
-
-Consumers that do not understand this convention should treat absent or ignored
-values as equivalent to:
-
-```json
-{
-  "publishable": true,
-  "indexable": true
-}
-```
-
-This preserves backward compatibility with v1 renderers that ignore metadata.
-The convention does not add required fields and does not promote these keys to
-the top-level event object.
-
-Canonical fallback example:
-
-```json
-{
-  "schema_version": "1.0",
-  "id": "sig_route_fallback_001",
-  "occurred_at": "2026-04-20T12:00:00Z",
-  "producer": "serpradio.route_intelligence",
-  "entity": "route.jfk_lhr",
-  "event": "snapshot.fallback_served",
-  "channel": "advisory",
-  "valence": 0.45,
-  "energy": 0.3,
-  "tension": 0.5,
-  "intensity": 0.4,
-  "hue": 200,
-  "pulse": 0.35,
-  "metadata": {
-    "publishable": false,
-    "indexable": true,
-    "fallback_reason": "primary_source_stale",
-    "route": "JFK-LHR"
-  }
-}
-```
+The ratified optional keys `publishable`, `indexable`, and `fallback_reason`
+are specified in [metadata-conventions.md](./metadata-conventions.md). That
+file is the in-repo target for conformance L4. The convention does not add
+required fields and does not promote these keys to the top-level event object.
 
 ## Renderer stance
 
@@ -198,7 +148,15 @@ Additive extensions to v1 that do not modify `schema.json`:
 ## Profiles
 
 Profiles constrain optional metadata and event semantics without changing this
-schema:
+schema. They are adjacent packages, not Signal Contract v2, and they do not add
+required fields to the flat event.
 
-- [Agent Lifecycle Profile 0.1](../../profiles/agent-lifecycle/0.1/) — observed
-  agent lifecycle, attention, completion, error, and recovery semantics.
+| Profile | Canonical question |
+| --- | --- |
+| [vibenet.agent-lifecycle/0.1](../../profiles/agent-lifecycle/0.1/) | What should a renderer know about an agent without receiving prompts, output, or private identifiers? |
+| [vibenet.adapter-profile/0.1](../../profiles/adapter-profile/0.1/) | When may a foreign source event become a Signal Contract event? |
+| [vibenet.modulation-profile/0.1](../../profiles/modulation-profile/0.1/) | How may renderer-facing state travel between two immutable waypoints? |
+| [vibenet.attention-projection/0.1](../../profiles/attention-projection/0.1/) | Which valid events may occupy limited human attention without changing what happened? |
+
+Observed is not understood. Understood is not authorized to render. Selection
+is not truth. Arrival is not the same fact as destination.

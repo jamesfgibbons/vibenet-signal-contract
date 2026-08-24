@@ -10,7 +10,7 @@ This repo is the public source package for the open protocol served live at [vib
 
 ```bash
 python3 -m pip install jsonschema referencing
-python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles -v
+python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles tests.test_doc_drift -v
 ```
 
 ## Canonical example
@@ -110,7 +110,7 @@ The live browser primitive is served from [vibenet.ai/pulse.js](https://vibenet.
 
 ```bash
 python3 -m pip install jsonschema referencing
-python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles -v
+python3 -m unittest tests.test_schema tests.test_agent_lifecycle_profile tests.test_adjacent_profiles tests.test_doc_drift -v
 ```
 
 ### Run the browser example
