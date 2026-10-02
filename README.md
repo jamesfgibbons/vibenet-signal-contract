@@ -101,6 +101,7 @@ The live browser primitive is served from [vibenet.ai/pulse.js](https://vibenet.
 - [Live protocol reference](https://vibenet.ai/protocol)
 - [`spec/v1/schema.json`](spec/v1/schema.json)
 - [`spec/v1/SPEC.md`](spec/v1/SPEC.md)
+- [`PRINCIPLES.md`](PRINCIPLES.md)
 - [`examples/`](examples/)
 - [`site/`](site/)
 

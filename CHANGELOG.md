@@ -6,6 +6,10 @@ The format is based on Keep a Changelog and this project follows semantic versio
 
 ## [Unreleased]
 
+### Added
+
+- Added `PRINCIPLES.md`, a non-normative reading guide to six principles already stated in the adapter, attention-projection, and agent-lifecycle profiles
+
 ## [1.1.0] - 2026-08-16
 
 ### Added
